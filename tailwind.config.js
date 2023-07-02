@@ -10,7 +10,7 @@ module.exports = {
       fontFamily: {
         satoshi: ["Satoshi", "sans-serif"],
         inter: ["Inter", "sans-serif"],
-        chewi: ["Chewi", "sans-serif"],
+        chewy: ["Chewy", "var(--font-chewy)"],
       },
       colors: {
         "primary-orange": "#FF5722",
