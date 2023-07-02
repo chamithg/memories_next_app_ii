@@ -1,5 +1,14 @@
+import { Chewy } from "next/font/google";
+
 import "../styles/globals.css";
 import Provider from "@/components/Provider";
+
+const chewy = Chewy({
+  subsets: ["latin"],
+  weight: ["400"],
+  display: "swap",
+  variable: "--font-chewy",
+});
 
 export const metadata = {
   title: "Memories",
@@ -7,7 +16,7 @@ export const metadata = {
 };
 function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${chewy.variable}`}>
       <body>
         <Provider>
           <div className="main">
