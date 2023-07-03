@@ -18,7 +18,7 @@ const MainPanel = () => {
   }, []);
 
   return (
-    <div className="mt-10 flex flex-col items-center">
+    <div className="mt-10 flex flex-col items-center w-100">
       <button
         className="grad_btn mt-10 w-50 h-20"
         onClick={() => setViewSign(true)}>
