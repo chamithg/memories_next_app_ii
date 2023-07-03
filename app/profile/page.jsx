@@ -1,19 +1,29 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 
 import Link from "next/link";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import CreateAlbum from "@/components/CreateAlbum";
+import ProfileFeed from "@/components/ProfileFeed";
 
 const ProfilePage = () => {
   const router = useRouter();
   const { data: session } = useSession();
-  if (!session?.user) {
-    router.push("/");
-  }
+  useEffect(() => {
+    const fetchAlbum = async () => {
+      alert("hello");
+    };
+    if (session?.user.id) {
+      fetchAlbum();
+    } else {
+      // router.push("/");
+    }
+  }, []);
+
   return (
-    <section className="flex mt-20">
+    <section className="flex mt-20 flex-col w-100">
       <div className="flex flex-row ">
         <Image
           src={session?.user.image}
@@ -29,6 +39,8 @@ const ProfilePage = () => {
           <p>{session?.user.email}</p>
         </div>
       </div>
+      <ProfileFeed />
+      <CreateAlbum userId={session?.user.id} />
     </section>
   );
 };
