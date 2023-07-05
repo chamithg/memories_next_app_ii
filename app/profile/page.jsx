@@ -1,29 +1,34 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import Link from "next/link";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import CreateAlbum from "@/components/CreateAlbum";
 import ProfileFeed from "@/components/ProfileFeed";
+import { useRouter } from "next/navigation";
 
 const ProfilePage = () => {
-  const router = useRouter();
   const { data: session } = useSession();
+  const [albums, setAlbums] = useState();
+
+  const router = useRouter();
   useEffect(() => {
     const fetchAlbum = async () => {
-      alert("hello");
+      try {
+        const response = await fetch(`/api/${session?.user.id}/album`);
+        const data = await response.json();
+        setAlbums(data);
+      } catch (error) {}
     };
     if (session?.user.id) {
       fetchAlbum();
-    } else {
-      // router.push("/");
     }
-  }, []);
+    router.push("/");
+  }, [session?.user.id]);
 
   return (
-    <section className="flex mt-20 flex-col w-100">
+    <section className="flex mt-20 flex-col w-screen items-center">
       <div className="flex flex-row ">
         <Image
           src={session?.user.image}
@@ -39,7 +44,8 @@ const ProfilePage = () => {
           <p>{session?.user.email}</p>
         </div>
       </div>
-      <ProfileFeed />
+      <ProfileFeed albums={albums} />
+
       <CreateAlbum userId={session?.user.id} />
     </section>
   );
