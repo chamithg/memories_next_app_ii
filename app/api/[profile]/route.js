@@ -2,6 +2,7 @@ import { connectToDB } from "@/utils/database";
 import Album from "@/models/album";
 
 export const GET = async (request, { params }) => {
+  console.log("helllo");
   try {
     await connectToDB();
     const albums = await Album.find({ creator: params.profile }).populate(
