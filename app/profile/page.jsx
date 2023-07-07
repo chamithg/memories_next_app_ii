@@ -7,25 +7,29 @@ import { useSession } from "next-auth/react";
 import CreateAlbum from "@/components/CreateAlbum";
 import ProfileFeed from "@/components/ProfileFeed";
 import { useRouter } from "next/navigation";
+import Loading from "@/components/Loading";
 
 const ProfilePage = () => {
   const { data: session } = useSession();
-  const [albums, setAlbums] = useState();
+  const [albums, setAlbums] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [viewCreate, setViewCreate] = useState(false);
 
   const router = useRouter();
   useEffect(() => {
     const fetchAlbum = async () => {
+      setLoading(true);
       try {
-        const response = await fetch(`/api/${session?.user.id}/album`);
+        const response = await fetch(`/api/${session?.user.id}`);
         const data = await response.json();
         setAlbums(data);
+        setLoading(false);
       } catch (error) {}
     };
     if (session?.user.id) {
       fetchAlbum();
     }
-    router.push("/");
-  }, [session?.user.id]);
+  }, [session?.user.id, viewCreate]);
 
   return (
     <section className="flex mt-20 flex-col w-screen items-center">
@@ -44,9 +48,25 @@ const ProfilePage = () => {
           <p>{session?.user.email}</p>
         </div>
       </div>
-      <ProfileFeed albums={albums} />
 
-      <CreateAlbum userId={session?.user.id} />
+      <ProfileFeed albums={albums} />
+      {loading && (
+        <div className="flex gap-2 justify-center items-center">
+          <Loading />
+          <h1 className="orange_gradient font-semibold">Loading Albums ...</h1>
+        </div>
+      )}
+
+      {viewCreate ? (
+        <CreateAlbum userId={session?.user.id} setViewCreate={setViewCreate} />
+      ) : (
+        <button
+          className="grad_btn mt-5 font-semibold"
+          onClick={() => setViewCreate(true)}>
+          {" "}
+          Add New Album
+        </button>
+      )}
     </section>
   );
 };

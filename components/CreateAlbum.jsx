@@ -5,7 +5,7 @@ import Image from "next/image";
 import FileBase from "react-file-base64";
 import { useRouter } from "next/navigation";
 
-const CreateAlbum = ({ userId }) => {
+const CreateAlbum = ({ userId, setViewCreate }) => {
   const [albumData, setAlbumData] = useState({
     albumname: "",
     desc: "",
@@ -17,8 +17,7 @@ const CreateAlbum = ({ userId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(albumData);
-      const response = await fetch("/api/album/new", {
+      const response = await fetch("/api/profile/newAlbum", {
         method: "POST",
         body: JSON.stringify({
           albumname: albumData.albumname,
@@ -37,6 +36,7 @@ const CreateAlbum = ({ userId }) => {
     } catch (error) {
       console.log(error);
     } finally {
+      setViewCreate(false);
       router.push("/profile");
     }
   };
