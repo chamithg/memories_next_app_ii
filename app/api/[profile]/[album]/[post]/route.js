@@ -1,12 +1,11 @@
 import { connectToDB } from "@/utils/database";
-import Post from "@/models/post";
+import Image from "next/image";
 
 export const GET = async (request, { params }) => {
   try {
     await connectToDB();
-    const posts = await Post.find({ album: params.album });
-    console.log("get called", posts);
-    return new Response(JSON.stringify(posts), { status: 200 });
+    const images = await Image.find({ post: params.post });
+    return new Response(JSON.stringify(images), { status: 200 });
   } catch (error) {
     return new Response("failed to fetch all posts", { status: 500 });
   }
