@@ -1,6 +1,10 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
+import CreateImage from "./CreateImage";
 
 const DisplayPosts = ({ post }) => {
+  const [uploadView, setUploadView] = useState(false);
   return (
     <div className="w-full mt-10">
       <h1 className="orange_gradient text-left font-chewy text-4xl mt-2">
@@ -11,10 +15,16 @@ const DisplayPosts = ({ post }) => {
         {post.desc}
       </p>
       <div>
-        <button className="h-7 w-7 hover:scale-105 rounded-full bg-gradient-to-r from-pink-800 text-white to-pink-400">
-          {" "}
-          +{" "}
-        </button>
+        {uploadView ? (
+          <CreateImage />
+        ) : (
+          <button
+            className="h-7 w-7 hover:scale-105 rounded-full bg-gradient-to-r from-pink-800 text-white to-pink-400"
+            onClick={() => setUploadView(true)}>
+            {" "}
+            +{" "}
+          </button>
+        )}
       </div>
     </div>
   );
