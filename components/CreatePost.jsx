@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 
-const CreatePost = ({ pathname, setLoading, setViewCreate }) => {
+const CreatePost = ({ pathname, setViewCreate }) => {
   const albumId = pathname.split("/")[2];
   const { data: session } = useSession();
   const [post, setPost] = useState({

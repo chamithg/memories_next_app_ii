@@ -9,10 +9,6 @@ const ImageSchema = new Schema({
     type: String,
     required: [true, "caption is required!"],
   },
-  desc: {
-    type: String,
-    required: [true, "Description is required!"],
-  },
   image: {
     type: String,
   },
