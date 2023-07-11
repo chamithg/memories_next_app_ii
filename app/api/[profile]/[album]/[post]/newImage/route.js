@@ -1,13 +1,16 @@
 import { connectToDB } from "@/utils/database";
-import Image from "next/image";
+import Image from "@/models/image";
+
 export const POST = async (req, res) => {
   const { post, caption, image } = await req.json();
   try {
     await connectToDB();
     const newImage = new Image({
-      post: post,
+      post,
       caption,
-      image,
+      image: image.base64,
+      likes: [],
+      comments: [],
     });
     await newImage.save();
     return new Response(JSON.stringify(newImage), { status: 201 });
