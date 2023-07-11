@@ -26,7 +26,6 @@ const Album = () => {
       }
     };
     fetchPosts();
-    console.log(posts);
   }, [viewCreate]);
   return (
     <div className="w-10/12 mt-10 flex flex-col items-center">
@@ -38,7 +37,10 @@ const Album = () => {
           </h1>
         </div>
       )}
-      {posts && posts.map((post) => <DisplayPosts post={post} />)}
+      {posts &&
+        posts.map((post) => (
+          <DisplayPosts key={post._id} pathname={pathname} post={post} />
+        ))}
       {viewCreate ? (
         <CreatePost pathname={pathname} setViewCreate={setViewCreate} />
       ) : (

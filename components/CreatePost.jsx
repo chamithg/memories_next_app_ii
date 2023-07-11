@@ -23,7 +23,6 @@ const CreatePost = ({ pathname, setViewCreate }) => {
         }),
       });
       if (response.ok) {
-        console.log("DONE");
         setPost({
           postname: "",
           desc: "",
