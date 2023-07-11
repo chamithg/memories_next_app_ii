@@ -11,6 +11,13 @@ const ImageSchema = new Schema({
   },
   image: {
     type: String,
+    required: [true, "Choose an image!"],
+  },
+  likes: {
+    type: [],
+  },
+  comments: {
+    type: [],
   },
 });
 

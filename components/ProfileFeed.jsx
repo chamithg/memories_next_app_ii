@@ -31,7 +31,6 @@ const AlbumIcon = ({ data }) => {
 };
 
 const ProfileFeed = ({ albums }) => {
-  console.log(albums);
   return (
     <div className="w-2/3 mt-10">
       <h1 className="text-2xl mt-15 mb-15 font-semibold pink_gradient font-satoshi">
