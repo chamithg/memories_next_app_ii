@@ -111,6 +111,9 @@
 .glassmorphism {
   @apply rounded-xl border border-gray-200 bg-white/75 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur p-5;
 }
+.glassmorphism_2 {
+  @apply rounded-xl border border-gray-200 bg-white/75 shadow-[inset_20px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur-xl p-5;
+}
 .prompt_layout {
   @apply space-y-6 sm:columns-2 sm:gap-6 xl:columns-3;
 }
@@ -156,5 +159,5 @@
   @apply bg-slate-50 border-none rounded-full border-stone-600;
 }
 .slide_show {
-  @apply fixed z-50 h-screen w-screen;
+  @apply fixed h-screen w-screen;
 }
