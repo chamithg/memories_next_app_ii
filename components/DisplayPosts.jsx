@@ -4,11 +4,13 @@ import React, { useEffect, useState } from "react";
 import CreateImage from "./CreateImage";
 import PictureFeed from "./PictureFeed";
 import Loading from "./Loading";
+import ImageCarousel from "./ImageCarousel";
 
 const DisplayPosts = ({ post, pathname }) => {
   const [uploadView, setUploadView] = useState(false);
   const [loading, setLoading] = useState(true);
   const [collectionImages, setCollectionImages] = useState([]);
+  const [slideView, setSlideView] = useState(true);
 
   const fetchImages = async () => {
     setLoading(true);
@@ -29,15 +31,30 @@ const DisplayPosts = ({ post, pathname }) => {
 
   return (
     <div className="w-full mt-10">
-      <h1 className="orange_gradient text-left font-chewy text-4xl mt-2">
-        {post.postname}
-      </h1>
+      <div className="flex place-content-between">
+        <h1 className="orange_gradient text-left font-chewy text-4xl mt-2">
+          {post.postname}
+        </h1>
+        <button
+          className="grad_btn_pink"
+          onClick={() => setSlideView(!slideView)}>
+          {" "}
+          {slideView ? "Thumbnails" : "Slide View"}
+        </button>
+      </div>
+
       <div className=" mt-2 h-1 w-full bg-gradient-to-r from-pink-800 via-pink-200 to-pink-400 "></div>
       <p className="mt-2 text-left font-satoshi font-semibold text-lg text-gray-700">
         {post.desc}
       </p>
       <div>
-        {loading ? <Loading /> : <PictureFeed images={collectionImages} />}
+        {loading ? (
+          <Loading />
+        ) : slideView ? (
+          <ImageCarousel images={collectionImages} />
+        ) : (
+          <PictureFeed images={collectionImages} />
+        )}
         {uploadView ? (
           <CreateImage setUploadView={setUploadView} postID={post._id} />
         ) : (
