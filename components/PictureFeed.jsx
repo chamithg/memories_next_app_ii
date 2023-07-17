@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { AiFillCloseCircle } from "react-icons/ai";
-import { BiChevronLeftCircle, BiChevronRightCircle } from "react-icons/bi";
+
 import Image from "next/image";
 
 const ImageThumb = ({ image }) => {
