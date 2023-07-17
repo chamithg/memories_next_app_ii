@@ -3,7 +3,7 @@ import { Carousel } from "react-responsive-carousel";
 
 const ImageCarousel = ({ images, setSlideShow }) => {
   return (
-    <Carousel className="glassmorphism_2">
+    <Carousel className="glassmorphism_3">
       {images.map((image) => (
         <div className="bg-contain bg-center">
           <img
