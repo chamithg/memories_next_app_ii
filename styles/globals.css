@@ -123,6 +123,9 @@
 .glassmorphism_3 {
   @apply rounded-sm border border-gray-400 bg-white/75 shadow-[inset_20px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur-sm p-3;
 }
+.glassmorphism_4 {
+  @apply rounded-full border border-gray-200 bg-white/75 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur p-2;
+}
 .prompt_layout {
   @apply space-y-6 sm:columns-2 sm:gap-6 xl:columns-3;
 }
