@@ -1,5 +1,4 @@
 import { Chewy } from "next/font/google";
-
 import "../styles/globals.css";
 import Provider from "@/components/Provider";
 
