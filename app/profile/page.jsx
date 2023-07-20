@@ -8,12 +8,14 @@ import CreateAlbum from "@/components/CreateAlbum";
 import ProfileFeed from "@/components/ProfileFeed";
 import { useRouter } from "next/navigation";
 import Loading from "@/components/Loading";
+import DeleteAlbum from "@/components/DeleteItem";
 
 const ProfilePage = () => {
   const { data: session } = useSession();
   const [albums, setAlbums] = useState([]);
   const [loading, setLoading] = useState(true);
   const [viewCreate, setViewCreate] = useState(false);
+  const [viewDelete, setViewDelete] = useState({ data: "", view: false });
 
   const router = useRouter();
   useEffect(() => {
@@ -29,7 +31,7 @@ const ProfilePage = () => {
     if (session?.user.id) {
       fetchAlbum();
     }
-  }, [session?.user.id, viewCreate]);
+  }, [session?.user.id, viewCreate, viewDelete]);
 
   return (
     <section className="flex mt-20 flex-col w-screen items-center">
@@ -49,12 +51,25 @@ const ProfilePage = () => {
         </div>
       </div>
 
-      <ProfileFeed albums={albums} />
+      <ProfileFeed
+        albums={albums}
+        viewDelete={viewDelete}
+        setViewDelete={setViewDelete}
+      />
       {loading && (
         <div className="flex gap-2 justify-center items-center">
           <Loading />
           <h1 className="orange_gradient font-semibold">Loading Albums ...</h1>
         </div>
+      )}
+      {viewDelete.view && (
+        <DeleteAlbum
+          viewDelete={viewDelete}
+          setViewDelete={setViewDelete}
+          type="Album"
+          path={`api/profile/${viewDelete.data._id}`}
+          name={viewDelete.data.albumname}
+        />
       )}
 
       {viewCreate ? (
