@@ -3,6 +3,7 @@ import Post from "@/models/post";
 import Album from "@/models/album";
 import Image from "@/models/image";
 
+// fetch albums
 export const GET = async (request, { params }) => {
   try {
     await connectToDB();
@@ -11,8 +12,7 @@ export const GET = async (request, { params }) => {
   } catch (error) {
     return new Response("failed to fetch all posts", { status: 500 });
   }
-};
-
+}; // delete albums
 export const DELETE = async (request, { params }) => {
   try {
     await connectToDB();
