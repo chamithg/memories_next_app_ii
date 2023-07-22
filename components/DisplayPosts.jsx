@@ -10,7 +10,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { LuEdit3 } from "react-icons/lu";
 import DeleteItem from "./DeleteItem";
 
-const DisplayPosts = ({ post, pathname }) => {
+const DisplayPosts = ({ post, pathname, setViewDelete: setPostViewDelete }) => {
   const [uploadView, setUploadView] = useState(false);
   const [loading, setLoading] = useState(true);
   const [collectionImages, setCollectionImages] = useState([]);
@@ -38,8 +38,8 @@ const DisplayPosts = ({ post, pathname }) => {
   return (
     <div className="w-full">
       <div>
-        {/* for a post delete */}
-        {viewDelete.view && (
+        {/* for a Image delete */}
+        {/* {viewDelete.view && (
           <DeleteItem
             viewDelete={viewDelete}
             setViewDelete={setViewDelete}
@@ -47,7 +47,7 @@ const DisplayPosts = ({ post, pathname }) => {
             type={"Post"}
             name={post.postname}
           />
-        )}
+        )} */}
       </div>
 
       <div className="w-full mt-10">
@@ -69,9 +69,7 @@ const DisplayPosts = ({ post, pathname }) => {
                 </button>
                 <button
                   className="hover:scale-105 hover:bg-red-200 transition-all glassmorphism_4 ml-2"
-                  onClick={() =>
-                    setViewDelete({ ...viewDelete, view: true, data: post._id })
-                  }>
+                  onClick={() => setPostViewDelete({ view: true, data: post })}>
                   <RiDeleteBin4Line />
                 </button>
               </div>
