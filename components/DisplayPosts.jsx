@@ -14,14 +14,14 @@ const DisplayPosts = ({ post, pathname, setViewDelete: setPostViewDelete }) => {
   const [uploadView, setUploadView] = useState(false);
   const [loading, setLoading] = useState(true);
   const [collectionImages, setCollectionImages] = useState([]);
-  const [slideView, setSlideView] = useState(true);
+  const [slideView, setSlideView] = useState(false);
   const [viewDelete, setViewDelete] = useState({ view: false, data: "" });
   const [editMode, setEditMode] = useState(false);
 
   const fetchImages = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`/api${pathname}/${post._id}/fetchImages`);
+      const response = await fetch(`/api${pathname}/${post._id}/image`);
       const data = await response.json();
       setCollectionImages(data);
       setLoading(false);
@@ -33,21 +33,21 @@ const DisplayPosts = ({ post, pathname, setViewDelete: setPostViewDelete }) => {
 
   useEffect(() => {
     fetchImages();
-  }, [uploadView]);
+  }, [uploadView, viewDelete]);
 
   return (
     <div className="w-full">
       <div>
         {/* for a Image delete */}
-        {/* {viewDelete.view && (
+        {viewDelete.view && (
           <DeleteItem
             viewDelete={viewDelete}
             setViewDelete={setViewDelete}
-            path={`/api${pathname}/${post._id}`}
-            type={"Post"}
-            name={post.postname}
+            path={`/api${pathname}/${post._id}/${viewDelete.data._id}`}
+            type={"Image"}
+            name={`"${viewDelete.data.caption}"`}
           />
-        )} */}
+        )}
       </div>
 
       <div className="w-full mt-10">
@@ -94,7 +94,10 @@ const DisplayPosts = ({ post, pathname, setViewDelete: setPostViewDelete }) => {
           ) : slideView ? (
             <ImageCarousel images={collectionImages} />
           ) : (
-            <PictureFeed images={collectionImages} />
+            <PictureFeed
+              images={collectionImages}
+              setViewDelete={setViewDelete}
+            />
           )}
           {uploadView ? (
             <CreateImage setUploadView={setUploadView} postID={post._id} />

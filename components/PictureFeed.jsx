@@ -6,7 +6,7 @@ import { LuEdit3 } from "react-icons/lu";
 
 import Image from "next/image";
 
-const ImageThumb = ({ image }) => {
+const ImageThumb = ({ image, setViewDelete }) => {
   const [editMode, setEditMode] = useState(false);
   return (
     <div>
@@ -19,9 +19,7 @@ const ImageThumb = ({ image }) => {
               </button>
               <button
                 className="hover:scale-105 hover:bg-red-200 transition-all glassmorphism_4 ml-2"
-                onClick={() =>
-                  setViewDelete({ ...viewDelete, view: true, data: data })
-                }>
+                onClick={() => setViewDelete({ view: true, data: image })}>
                 <RiDeleteBin4Line />
               </button>
             </div>
@@ -46,12 +44,16 @@ const ImageThumb = ({ image }) => {
   );
 };
 
-const PictureFeed = ({ images }) => {
+const PictureFeed = ({ images, setViewDelete }) => {
   return (
     <div>
       <div className="prompt_layout">
         {images.map((image) => (
-          <ImageThumb key={image._id} image={image} />
+          <ImageThumb
+            key={image._id}
+            image={image}
+            setViewDelete={setViewDelete}
+          />
         ))}
       </div>
     </div>

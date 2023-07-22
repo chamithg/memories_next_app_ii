@@ -1,6 +1,7 @@
 import { connectToDB } from "@/utils/database";
 import Image from "@/models/image";
 
+// creating image
 export const POST = async (req, res) => {
   const { post, caption, image } = await req.json();
   try {

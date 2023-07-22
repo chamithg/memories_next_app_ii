@@ -4,6 +4,8 @@ import Album from "@/models/album";
 import Image from "@/models/image";
 
 // this will handle deleting + editing a collection
+
+// deleting a collection
 export const DELETE = async (request, { params }) => {
   console.log(params);
   try {
@@ -23,3 +25,5 @@ export const DELETE = async (request, { params }) => {
     });
   }
 };
+
+// editing a collection
