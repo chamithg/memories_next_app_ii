@@ -39,6 +39,7 @@ const Album = () => {
           </h1>
         </div>
       )}
+      {/* this is for a post/collection delete */}
       {viewDelete.view && (
         <DeleteItem
           viewDelete={viewDelete}
