@@ -12,39 +12,45 @@ const CreateAlbum = ({ userId, setViewCreate }) => {
     coverImage: "",
   });
 
+  const [showValidations, setShowValidation] = useState(false);
+
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch("/api/profile/newAlbum", {
-        method: "POST",
-        body: JSON.stringify({
-          albumname: albumData.albumname,
-          userId: userId,
-          coverImage: albumData.coverImage,
-          desc: albumData.desc,
-        }),
-      });
-      if (response.ok) {
-        setAlbumData({
-          albumname: "",
-          desc: "",
-          coverImage: "",
+    if (albumData.albumname && albumData.coverImage && albumData.desc) {
+      try {
+        const response = await fetch("/api/profile/newAlbum", {
+          method: "POST",
+          body: JSON.stringify({
+            albumname: albumData.albumname,
+            userId: userId,
+            coverImage: albumData.coverImage,
+            desc: albumData.desc,
+          }),
         });
+        if (response.ok) {
+          setAlbumData({
+            albumname: "",
+            desc: "",
+            coverImage: "",
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setViewCreate(false);
+        router.push("/profile");
       }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setViewCreate(false);
-      router.push("/profile");
+    } else {
+      setShowValidation(true);
     }
   };
 
   return (
-    <div className="mt-10 flex items-center flex-col">
+    <div className="transition-opacity fixed z-50 top-0 left-0 h-screen w-screen backdrop-blur-2xl ">
       <form
-        className="glassmorphism shadow-md min-w-full"
+        className="glassmorphism fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 shadow-md w-screen-2/5 "
         onSubmit={(e) => handleSubmit(e)}>
         <h1 className="text-2xl font-semibold pink_gradient font-satoshi mb-10">
           Create Album
@@ -53,6 +59,11 @@ const CreateAlbum = ({ userId, setViewCreate }) => {
           <label className="block text-gray-700 text-sm font-bold mb-2">
             Album Name
           </label>
+          {showValidations && !albumData.albumname && (
+            <h1 className=" text-red-600 font-semibold font-satoshi">
+              Please add a Album Name
+            </h1>
+          )}
           <input
             className="form_input"
             id="albumname"
@@ -67,6 +78,12 @@ const CreateAlbum = ({ userId, setViewCreate }) => {
           <label className="block text-gray-700 text-sm font-bold mb-2">
             Description
           </label>
+          {showValidations && !albumData.desc && (
+            <h1 className=" text-red-600 font-semibold font-satoshi">
+              Please add a description
+            </h1>
+          )}
+
           <textarea
             className="form_textarea"
             value={albumData.desc}
@@ -77,6 +94,11 @@ const CreateAlbum = ({ userId, setViewCreate }) => {
           <p className="text-red-500 text-xs italic"></p>
         </div>
         <div className="m-5">
+          {showValidations && !albumData.coverImage && (
+            <h1 className=" text-red-600 font-semibold font-satoshi">
+              Please select a cover image
+            </h1>
+          )}
           <FileBase
             type="file"
             multiple={false}
@@ -85,6 +107,7 @@ const CreateAlbum = ({ userId, setViewCreate }) => {
             }
           />
         </div>
+
         {albumData.coverImage ? (
           <Image
             src={albumData.coverImage.base64}
