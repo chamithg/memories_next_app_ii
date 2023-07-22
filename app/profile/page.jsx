@@ -23,7 +23,11 @@ const ProfilePage = () => {
       setLoading(true);
       try {
         const response = await fetch(`/api/${session?.user.id}`);
+        {
+          cache: "no-store";
+        }
         const data = await response.json();
+
         setAlbums(data);
         setLoading(false);
       } catch (error) {}
