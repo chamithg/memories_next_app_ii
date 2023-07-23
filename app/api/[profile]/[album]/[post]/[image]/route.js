@@ -30,3 +30,23 @@ export const DELETE = async (request, { params }) => {
     });
   }
 };
+
+// Edit image -->
+export const PATCH = async (request, { params }) => {
+  const { image, caption } = await request.json();
+  try {
+    await connectToDB();
+    // Find the existing Album by ID
+    const existingImage = await Image.findById(params.image);
+    if (!existingImage) {
+      return new Response("Image not found", { status: 404 });
+    }
+    // Update the Album with new data
+    existingImage.image = image.base64;
+    existingImage.caption = caption;
+    await existingImage.save();
+    return new Response("Successfully updated the Image", { status: 200 });
+  } catch (error) {
+    return new Response("Error Updating the Image", { status: 500 });
+  }
+};
