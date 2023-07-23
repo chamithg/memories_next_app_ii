@@ -6,12 +6,16 @@ import CreatePost from "@/components/CreatePost";
 import DisplayPosts from "@/components/DisplayPosts";
 import Loading from "@/components/Loading";
 import DeleteItem from "@/components/DeleteItem";
+import EditPost from "@/components/EditPost";
 
 const Album = () => {
   const [viewCreate, setViewCreate] = useState(false);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  //  for deleting a post
   const [viewDelete, setViewDelete] = useState({ view: false, data: "" });
+  // for editing a post
+  const [viewEdit, setViewEdit] = useState({ view: false, data: "" });
   const pathname = usePathname();
 
   useEffect(() => {
@@ -28,7 +32,7 @@ const Album = () => {
       }
     };
     fetchPosts();
-  }, [viewCreate, viewDelete]);
+  }, [viewCreate, viewDelete, viewEdit]);
   return (
     <div className="w-10/12 mt-10 flex flex-col items-center">
       {loading && (
@@ -49,6 +53,10 @@ const Album = () => {
           name={viewDelete.data.postname}
         />
       )}
+      {/* this is for post/collection edit */}
+      {viewEdit.view && (
+        <EditPost viewEdit={viewEdit} setViewEdit={setViewEdit} />
+      )}
       {posts &&
         posts.map((post) => (
           <DisplayPosts
@@ -56,6 +64,8 @@ const Album = () => {
             pathname={pathname}
             post={post}
             setViewDelete={setViewDelete}
+            viewEdit={viewEdit}
+            setViewEdit={setViewEdit}
           />
         ))}
       {viewCreate ? (

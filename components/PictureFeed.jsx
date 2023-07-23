@@ -6,7 +6,7 @@ import { LuEdit3 } from "react-icons/lu";
 
 import Image from "next/image";
 
-const ImageThumb = ({ image, setViewDelete }) => {
+const ImageThumb = ({ image, setViewDelete, viewEdit, setViewEdit }) => {
   const [editMode, setEditMode] = useState(false);
   return (
     <div>
@@ -14,7 +14,9 @@ const ImageThumb = ({ image, setViewDelete }) => {
         <div className="absolute top-3 right-3">
           {editMode ? (
             <div>
-              <button className="hover:scale-105  hover:bg-green-200 transition-all glassmorphism_4">
+              <button
+                className="hover:scale-105  hover:bg-green-200 transition-all glassmorphism_4"
+                onClick={() => setViewEdit({ view: true, data: image })}>
                 <LuEdit3 />
               </button>
               <button
@@ -44,7 +46,7 @@ const ImageThumb = ({ image, setViewDelete }) => {
   );
 };
 
-const PictureFeed = ({ images, setViewDelete }) => {
+const PictureFeed = ({ images, setViewDelete, viewEdit, setViewEdit }) => {
   return (
     <div>
       <div className="prompt_layout">
@@ -53,6 +55,8 @@ const PictureFeed = ({ images, setViewDelete }) => {
             key={image._id}
             image={image}
             setViewDelete={setViewDelete}
+            viewEdit={viewEdit}
+            setViewEdit={setViewEdit}
           />
         ))}
       </div>

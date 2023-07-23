@@ -9,6 +9,7 @@ import ProfileFeed from "@/components/ProfileFeed";
 import { useRouter } from "next/navigation";
 import Loading from "@/components/Loading";
 import DeleteAlbum from "@/components/DeleteItem";
+import EditAlbum from "@/components/EditAlbum";
 
 const ProfilePage = () => {
   const { data: session } = useSession();
@@ -16,6 +17,7 @@ const ProfilePage = () => {
   const [loading, setLoading] = useState(true);
   const [viewCreate, setViewCreate] = useState(false);
   const [viewDelete, setViewDelete] = useState({ data: "", view: false });
+  const [viewEdit, setViewEdit] = useState({ data: "", view: false });
 
   const router = useRouter();
   useEffect(() => {
@@ -24,7 +26,6 @@ const ProfilePage = () => {
       try {
         const response = await fetch(`/api/${session?.user.id}`);
         const data = await response.json();
-
         setAlbums(data);
         setLoading(false);
       } catch (error) {}
@@ -32,7 +33,7 @@ const ProfilePage = () => {
     if (session?.user.id) {
       fetchAlbum();
     }
-  }, [session?.user.id, viewCreate, viewDelete]);
+  }, [session?.user.id, viewCreate, viewDelete, viewEdit]);
 
   return (
     <section className="flex mt-20 flex-col w-screen items-center">
@@ -56,6 +57,8 @@ const ProfilePage = () => {
         albums={albums}
         viewDelete={viewDelete}
         setViewDelete={setViewDelete}
+        viewEdit={viewEdit}
+        setViewEdit={setViewEdit}
       />
       {loading && (
         <div className="flex gap-2 justify-center items-center">
@@ -63,6 +66,7 @@ const ProfilePage = () => {
           <h1 className="orange_gradient font-semibold">Loading Albums ...</h1>
         </div>
       )}
+      {/* display Album delete conf message */}
       {viewDelete.view && (
         <DeleteAlbum
           viewDelete={viewDelete}
@@ -72,7 +76,11 @@ const ProfilePage = () => {
           name={viewDelete.data.albumname}
         />
       )}
-
+      {/* display album edit form */}
+      {viewEdit.view && (
+        <EditAlbum viewEdit={viewEdit} setViewEdit={setViewEdit} />
+      )}
+      {/* display album create form */}
       {viewCreate ? (
         <CreateAlbum userId={session?.user.id} setViewCreate={setViewCreate} />
       ) : (

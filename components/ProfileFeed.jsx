@@ -7,7 +7,13 @@ import { RiDeleteBin4Line } from "react-icons/ri";
 import { FaRegEdit } from "react-icons/fa";
 import { LuEdit3 } from "react-icons/lu";
 
-const AlbumIcon = ({ data, setViewDelete, viewDelete }) => {
+const AlbumIcon = ({
+  data,
+  setViewDelete,
+  viewDelete,
+  setViewEdit,
+  viewEdit,
+}) => {
   const [editMode, setEditMode] = useState(false);
   const router = useRouter();
   const handleClick = () => {
@@ -19,7 +25,11 @@ const AlbumIcon = ({ data, setViewDelete, viewDelete }) => {
       <div className="absolute top-3 right-3">
         {editMode ? (
           <div>
-            <button className="hover:scale-105   hover:bg-green-200 transition-all glassmorphism_2">
+            <button
+              className="hover:scale-105   hover:bg-green-200 transition-all glassmorphism_2 "
+              onClick={() =>
+                setViewEdit({ ...viewEdit, view: true, data: data })
+              }>
               <LuEdit3 />
             </button>
             <button
@@ -59,7 +69,13 @@ const AlbumIcon = ({ data, setViewDelete, viewDelete }) => {
   );
 };
 
-const ProfileFeed = ({ albums, viewDelete, setViewDelete }) => {
+const ProfileFeed = ({
+  albums,
+  viewDelete,
+  setViewDelete,
+  setViewEdit,
+  viewEdit,
+}) => {
   return (
     <div className="w-2/3 mt-10">
       <h1 className="text-2xl mt-15 mb-15 font-semibold pink_gradient font-satoshi">
@@ -71,6 +87,8 @@ const ProfileFeed = ({ albums, viewDelete, setViewDelete }) => {
             data={album}
             setViewDelete={setViewDelete}
             viewDelete={viewDelete}
+            setViewEdit={setViewEdit}
+            viewEdit={viewEdit}
           />
         ))}
       </div>
