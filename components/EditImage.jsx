@@ -40,7 +40,7 @@ const EditImage = ({ viewEdit, setViewEdit }) => {
     }
   };
   return (
-    <div className="transition-opacity fixed z-50 top-0 left-0 h-screen w-screen backdrop-blur-2xl ">
+    <div className="transition-opacity fixed z-40 top-0 left-0 h-screen w-screen backdrop-blur-2xl ">
       <form
         onSubmit={(e) => handleSubmit(e)}
         className="glassmorphism fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 shadow-md w-screen-2/5 ">
@@ -48,32 +48,27 @@ const EditImage = ({ viewEdit, setViewEdit }) => {
           Edit Image
         </h1>
         <div className="flex items-center">
-          <div className="w-40 h-40 border-gray-500 border-2 flex items-center justify-center">
-            {uploadImage.image ? (
-              <Image
-                src={uploadImage.image.base64 || viewEdit.data.image}
-                className="m-5"
-                width={100}
-                height={100}
-                alt="upload_image"
-              />
-            ) : (
-              <>
-                <div>
-                  <div className="w-32 h-32 border-gray-500 border-2 border-dashed flex flex-col items-center justify-center">
-                    <AiOutlineCloudUpload className="w-7 h-7" />
-                    <div className="input_file w-24 h-10 overflow-hidden">
-                      <FileBase
-                        type="file"
-                        multiple={false}
-                        onDone={(base64) =>
-                          setUploadImage({ ...uploadImage, image: base64 })
-                        }></FileBase>
-                    </div>
-                  </div>
-                </div>
-              </>
-            )}
+          <div className="relative w-40 h-56 border-gray-500 border-2 flex items-center justify-center">
+            <div>
+              <div className="absolute  top-0 left-2 w-32 h-32 flex flex-col gap-2">
+                <AiOutlineCloudUpload className="z-50 w-7 h-7" />
+                <Image
+                  src={uploadImage.image.base64 || viewEdit.data.image}
+                  className="m-5"
+                  width={100}
+                  height={100}
+                  alt="upload_image"
+                />
+              </div>
+              <div className="absolute  bottom-0 left-6 input_file w-24 h-10 overflow-hidden">
+                <FileBase
+                  type="file"
+                  multiple={false}
+                  onDone={(base64) =>
+                    setUploadImage({ ...uploadImage, image: base64 })
+                  }></FileBase>
+              </div>
+            </div>
           </div>
           <div className="flex flex-col">
             <label className="block text-gray-700 ml-3 text-sm font-bold">
