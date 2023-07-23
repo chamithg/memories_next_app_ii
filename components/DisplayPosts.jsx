@@ -9,13 +9,23 @@ import { RiDeleteBin4Line } from "react-icons/ri";
 import { FaRegEdit } from "react-icons/fa";
 import { LuEdit3 } from "react-icons/lu";
 import DeleteItem from "./DeleteItem";
+import EditImage from "./EditImage";
 
-const DisplayPosts = ({ post, pathname, setViewDelete: setPostViewDelete }) => {
+const DisplayPosts = ({
+  post,
+  pathname,
+  setViewDelete: setPostViewDelete,
+  viewEdit: postViewEdit,
+  setViewEdit: setPostViewEdit,
+}) => {
   const [uploadView, setUploadView] = useState(false);
   const [loading, setLoading] = useState(true);
   const [collectionImages, setCollectionImages] = useState([]);
   const [slideView, setSlideView] = useState(false);
+  // for deleting an image
   const [viewDelete, setViewDelete] = useState({ view: false, data: "" });
+  // for editing an image
+  const [viewEdit, setViewEdit] = useState({ view: false, data: "" });
   const [editMode, setEditMode] = useState(false);
 
   const fetchImages = async () => {
@@ -33,7 +43,7 @@ const DisplayPosts = ({ post, pathname, setViewDelete: setPostViewDelete }) => {
 
   useEffect(() => {
     fetchImages();
-  }, [uploadView, viewDelete]);
+  }, [uploadView, viewDelete, viewEdit]);
 
   return (
     <div className="w-full">
@@ -64,7 +74,9 @@ const DisplayPosts = ({ post, pathname, setViewDelete: setPostViewDelete }) => {
             </button>
             {editMode ? (
               <div>
-                <button className="hover:scale-105  hover:bg-green-200 transition-all glassmorphism_4 ml-2">
+                <button
+                  className="hover:scale-105  hover:bg-green-200 transition-all glassmorphism_4 ml-2"
+                  onClick={() => setPostViewEdit({ view: true, data: post })}>
                   <LuEdit3 />
                 </button>
                 <button
@@ -97,6 +109,8 @@ const DisplayPosts = ({ post, pathname, setViewDelete: setPostViewDelete }) => {
             <PictureFeed
               images={collectionImages}
               setViewDelete={setViewDelete}
+              viewEdit={viewEdit}
+              setViewEdit={setViewEdit}
             />
           )}
           {uploadView ? (
@@ -108,6 +122,9 @@ const DisplayPosts = ({ post, pathname, setViewDelete: setPostViewDelete }) => {
               {" "}
               +{" "}
             </button>
+          )}
+          {viewEdit.view && (
+            <EditImage viewEdit={viewEdit} setViewEdit={setViewEdit} />
           )}
         </div>
       </div>

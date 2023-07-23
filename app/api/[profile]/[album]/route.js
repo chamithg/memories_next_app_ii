@@ -12,7 +12,9 @@ export const GET = async (request, { params }) => {
   } catch (error) {
     return new Response("failed to fetch all posts", { status: 500 });
   }
-}; // delete albums
+};
+
+// delete albums
 export const DELETE = async (request, { params }) => {
   try {
     await connectToDB();
@@ -35,5 +37,26 @@ export const DELETE = async (request, { params }) => {
     });
   } catch (error) {
     return new Response("failed to delate all posts", { status: 500 });
+  }
+};
+
+// edit Album
+export const PATCH = async (request, { params }) => {
+  const { albumname, desc, coverImage } = await request.json();
+  try {
+    await connectToDB();
+    // Find the existing Album by ID
+    const existingAlbum = await Album.findById(params.album);
+    if (!existingAlbum) {
+      return new Response("Album not found", { status: 404 });
+    }
+    // Update the Album with new data
+    existingAlbum.albumname = albumname;
+    existingAlbum.desc = desc;
+    existingAlbum.coverImage = coverImage.base64;
+    await existingAlbum.save();
+    return new Response("Successfully updated the Albums", { status: 200 });
+  } catch (error) {
+    return new Response("Error Updating the Album", { status: 500 });
   }
 };
