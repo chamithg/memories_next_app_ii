@@ -16,6 +16,10 @@ const AlbumSchema = new Schema({
     type: String,
     required: [true, "Description is required!"],
   },
+  code: {
+    type: String,
+    required: [true, "Access code is required!"],
+  },
 });
 
 // The "models" object is provided by the Mongoose Library and stores all the registered models.

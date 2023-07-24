@@ -74,6 +74,9 @@
 .grad_btn {
   @apply rounded-full hover:scale-105 bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center;
 }
+.grad_btn_1 {
+  @apply hover:scale-105 bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center;
+}
 .grad_btn_pink {
   @apply rounded-full hover:scale-105 bg-gradient-to-r from-pink-700 via-pink-400 to-pink-800 py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center;
 }
@@ -88,6 +91,9 @@
 }
 .outline_btn {
   @apply rounded-full hover:scale-105 border border-black bg-transparent py-1.5 px-5 text-black transition-all hover:bg-black hover:text-white text-center text-sm font-inter flex items-center justify-center;
+}
+.outline_btn_1 {
+  @apply hover:scale-105 border border-black bg-transparent py-1.5 px-5 text-black transition-all hover:bg-black hover:text-white text-center text-sm font-inter flex items-center justify-center;
 }
 .head_text {
   @apply mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl;
