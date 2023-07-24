@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
+
 import FileBase from "react-file-base64";
 import Image from "next/image";
 
@@ -38,7 +39,7 @@ const CreateImage = ({ postID, setUploadView }) => {
     }
   };
   return (
-    <div>
+    <div className="mt-5">
       <form onSubmit={(e) => handleSubmit(e)}>
         <div className="flex items-center">
           <div className="w-40 h-40 border-gray-500 border-2 flex items-center justify-center">

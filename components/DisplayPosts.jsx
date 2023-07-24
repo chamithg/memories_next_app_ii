@@ -117,7 +117,7 @@ const DisplayPosts = ({
             <CreateImage setUploadView={setUploadView} postID={post._id} />
           ) : (
             <button
-              className="h-7 w-7 hover:scale-105 rounded-full bg-gradient-to-r from-pink-800 text-white to-pink-400"
+              className="mt-5 h-7 w-7 hover:scale-105 rounded-full bg-gradient-to-r from-pink-800 text-white to-pink-400"
               onClick={() => setUploadView(true)}>
               {" "}
               +{" "}

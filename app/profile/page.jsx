@@ -18,6 +18,7 @@ const ProfilePage = () => {
   const [viewCreate, setViewCreate] = useState(false);
   const [viewDelete, setViewDelete] = useState({ data: "", view: false });
   const [viewEdit, setViewEdit] = useState({ data: "", view: false });
+  const [viewMode, setViewMode] = useState(false);
 
   const router = useRouter();
   useEffect(() => {
@@ -37,20 +38,37 @@ const ProfilePage = () => {
 
   return (
     <section className="flex mt-20 flex-col w-screen items-center">
-      <div className="flex flex-row ">
-        <Image
-          src={session?.user.image}
-          alt="profile"
-          className="rounded-full m-2"
-          width={100}
-          height={100}
-        />
-        <div>
-          <h1 className=" head_text font-chewy blue_gradient capitalize">
-            {session?.user.name}
-          </h1>
-          <p>{session?.user.email}</p>
-        </div>
+      <div className="flex w-2/3  h-20 items-center justify-center gap-4">
+        {/* <div className="flex flex-row ">
+          <Image
+            src={session?.user.image}
+            alt="profile"
+            className="rounded-full m-2"
+            width={100}
+            height={100}
+          />
+          <div>
+            <h1 className=" head_text font-chewy blue_gradient capitalize">
+              {session?.user.name.split(" ")[0]}
+            </h1>
+            <p>{session?.user.email}</p>
+          </div>
+        </div> */}
+        <button
+          className={`rounded-md flex-auto ${
+            viewMode ? "outline_btn_1" : "grad_btn_1"
+          } h-10`}
+          onClick={() => setViewMode(false)}>
+          Creator Mode
+        </button>
+
+        <button
+          className={`rounded-md flex-auto ${
+            viewMode ? "grad_btn_1" : "outline_btn_1"
+          }  h-10 text-xl`}
+          onClick={() => setViewMode(true)}>
+          Viewer Mode
+        </button>
       </div>
 
       <ProfileFeed
