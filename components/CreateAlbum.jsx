@@ -12,6 +12,9 @@ const CreateAlbum = ({ userId, setViewCreate }) => {
     coverImage: "",
   });
 
+  const accessCode = Math.random().toString(36).substring(2, 9);
+  console.log(typeof accessCode);
+
   const [showValidations, setShowValidation] = useState(false);
 
   const router = useRouter();
@@ -27,6 +30,7 @@ const CreateAlbum = ({ userId, setViewCreate }) => {
             userId: userId,
             coverImage: albumData.coverImage,
             desc: albumData.desc,
+            code: accessCode,
           }),
         });
         if (response.ok) {

@@ -1,7 +1,7 @@
 import { connectToDB } from "@/utils/database";
 import Album from "@/models/album";
 export const POST = async (req, res) => {
-  const { userId, albumname, desc, coverImage } = await req.json();
+  const { userId, albumname, desc, coverImage, code } = await req.json();
 
   try {
     await connectToDB();
@@ -10,7 +10,9 @@ export const POST = async (req, res) => {
       albumname,
       desc,
       coverImage: coverImage.base64,
+      code: code,
     });
+    console.log(newAlbum.code);
     await newAlbum.save();
     return new Response(JSON.stringify(newAlbum), { status: 201 });
   } catch (error) {

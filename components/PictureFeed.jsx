@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { RiDeleteBin4Line } from "react-icons/ri";
 import { FaRegEdit } from "react-icons/fa";
 import { LuEdit3 } from "react-icons/lu";
+import { AiOutlineHeart } from "react-icons/ai";
+import { MdOutlineInsertComment } from "react-icons/md";
 
 import Image from "next/image";
 
@@ -11,6 +13,15 @@ const ImageThumb = ({ image, setViewDelete, viewEdit, setViewEdit }) => {
   return (
     <div>
       <div className="relative shadow-md transition-all hover:scale-105 flex flex-col items-center">
+        <div className="absolute top-3 text-gray-600 left-3 flex flex-col gap-2 backdrop-blur-md p-2 rounded-md">
+          <div className="flex items-center gap-2">
+            <AiOutlineHeart className="w-8 h-8" /> <h1>{image.likes.length}</h1>
+          </div>
+          <div className="flex items-center gap-2">
+            <MdOutlineInsertComment className="w-8 h-8" />{" "}
+            <h1>{image.comments.length}</h1>
+          </div>
+        </div>
         <div className="absolute top-3 right-3">
           {editMode ? (
             <div>
