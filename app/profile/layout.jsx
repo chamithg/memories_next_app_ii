@@ -2,14 +2,16 @@
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { MdOutlineArrowBackIos } from "react-icons/md";
+import { useEffect } from "react";
 
 function ProfileLayout({ children }) {
   const { data: session } = useSession();
   const router = useRouter();
 
-  if (!session?.user) {
-    router.push("/");
-  }
+  // useEffect(() => {
+  //   if (!session) router.push("/");
+  // }, [session, router]);
 
   return (
     <>
@@ -19,13 +21,17 @@ function ProfileLayout({ children }) {
         </div>
 
         <div className="flex flex-row items-center gap-2">
+          <button className="grad_btn_pink" onClick={() => router.back()}>
+            <MdOutlineArrowBackIos />
+          </button>
+
           <h1 className=" text-3xl font-chewy blue_gradient capitalize">
             {" Hi " + session?.user.name.split(" ")[0] + "!"}
           </h1>
           <Image
             src={session?.user.image}
             alt="profile"
-            className="rounded-full m-2"
+            className="rounded-full"
             width={50}
             height={50}
           />
