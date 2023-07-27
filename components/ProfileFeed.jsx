@@ -6,6 +6,9 @@ import { useRouter } from "next/navigation";
 import { RiDeleteBin4Line } from "react-icons/ri";
 import { FaRegEdit } from "react-icons/fa";
 import { LuEdit3 } from "react-icons/lu";
+import { FiShare2 } from "react-icons/fi";
+import { CiMenuKebab } from "react-icons/ci";
+import ShareAlbum from "./ShareAlbum";
 
 const AlbumIcon = ({
   data,
@@ -15,13 +18,14 @@ const AlbumIcon = ({
   viewEdit,
 }) => {
   const [editMode, setEditMode] = useState(false);
+  const [shareMode, setShareMode] = useState({ view: false, data: "" });
   const router = useRouter();
   const handleClick = () => {
     router.push(`/profile/${data._id}`);
   };
 
   return (
-    <div className="static prompt_card transition-all hover:scale-105 flex flex-col items-center">
+    <div className="mt-5 static prompt_card transition-all hover:border-4 flex flex-col items-center">
       <div className="absolute top-3 right-3">
         {editMode ? (
           <div>
@@ -39,15 +43,25 @@ const AlbumIcon = ({
               }>
               <RiDeleteBin4Line />
             </button>
+            <button
+              className="hover:scale-105  hover:bg-blue-200 transition-all glassmorphism_2 ml-2"
+              onClick={() => setShareMode({ view: true, data: data })}>
+              <FiShare2 />
+            </button>
           </div>
         ) : (
-          <button
-            className="hover:scale-105  hover:bg-blue-200 transition-all glassmorphism_2"
-            onClick={() => setEditMode(!editMode)}>
-            <FaRegEdit />
-          </button>
+          <div>
+            <button
+              className="hover:scale-105 hover:bg-blue-200 transition-all glassmorphism_2"
+              onClick={() => setEditMode(!editMode)}>
+              <CiMenuKebab />
+            </button>
+          </div>
         )}
       </div>
+      {shareMode.view && (
+        <ShareAlbum shareMode={shareMode} setSearchMode={setShareMode} />
+      )}
 
       <Image
         onClick={handleClick}
@@ -77,8 +91,8 @@ const ProfileFeed = ({
   viewEdit,
 }) => {
   return (
-    <div className="w-2/3 mt-10">
-      <h1 className="text-2xl mt-15 mb-15 font-semibold pink_gradient font-satoshi">
+    <div className="w-2/3 mt-5">
+      <h1 className="text-2xl font-semibold pink_gradient font-satoshi">
         Album Collection
       </h1>
       <div className="prompt_layout">
