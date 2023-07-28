@@ -3,12 +3,18 @@ import Post from "@/models/post";
 import Album from "@/models/album";
 import Image from "@/models/image";
 
-// fetch albums
+// fetch posts
 export const GET = async (request, { params }) => {
+  console.log(params);
   try {
     await connectToDB();
     const posts = await Post.find({ album: params.album });
-    return new Response(JSON.stringify(posts), { status: 200 });
+
+    const album = await Album.findById(params.album);
+
+    return new Response(JSON.stringify({ posts: posts, creator: album._id }), {
+      status: 200,
+    });
   } catch (error) {
     return new Response("failed to fetch all posts", { status: 500 });
   }

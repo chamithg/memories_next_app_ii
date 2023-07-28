@@ -8,7 +8,13 @@ import { MdOutlineInsertComment } from "react-icons/md";
 
 import Image from "next/image";
 
-const ImageThumb = ({ image, setViewDelete, viewEdit, setViewEdit }) => {
+const ImageThumb = ({
+  image,
+  setViewDelete,
+  viewEdit,
+  setViewEdit,
+  viewMode,
+}) => {
   const [editMode, setEditMode] = useState(false);
   return (
     <div>
@@ -57,7 +63,13 @@ const ImageThumb = ({ image, setViewDelete, viewEdit, setViewEdit }) => {
   );
 };
 
-const PictureFeed = ({ images, setViewDelete, viewEdit, setViewEdit }) => {
+const PictureFeed = ({
+  images,
+  setViewDelete,
+  viewEdit,
+  setViewEdit,
+  viewMode,
+}) => {
   return (
     <div>
       <div className="prompt_layout">
