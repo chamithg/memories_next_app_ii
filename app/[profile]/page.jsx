@@ -14,6 +14,7 @@ import EditAlbum from "@/components/EditAlbum";
 const ProfilePage = () => {
   const { data: session } = useSession();
   const [albums, setAlbums] = useState([]);
+  const [sharedAlbums, setSharedAlbums] = useState([]);
   const [loading, setLoading] = useState(true);
   const [viewCreate, setViewCreate] = useState(false);
   const [viewDelete, setViewDelete] = useState({ data: "", view: false });
@@ -27,9 +28,14 @@ const ProfilePage = () => {
       try {
         const response = await fetch(`/api/${session?.user.id}`);
         const data = await response.json();
-        setAlbums(data);
+        setAlbums(data.albums);
+        setSharedAlbums(data.sharedAlbums);
         setLoading(false);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      } finally {
+        console.log(albums);
+      }
     };
     if (session?.user.id) {
       fetchAlbum();
@@ -57,12 +63,14 @@ const ProfilePage = () => {
       </div>
 
       <ProfileFeed
-        albums={albums}
+        albums={viewMode ? sharedAlbums : albums}
         viewDelete={viewDelete}
         setViewDelete={setViewDelete}
         viewEdit={viewEdit}
         setViewEdit={setViewEdit}
+        viewMode={viewMode}
       />
+
       {loading && (
         <div className="flex gap-2 justify-center items-center">
           <Loading />
@@ -87,12 +95,16 @@ const ProfilePage = () => {
       {viewCreate ? (
         <CreateAlbum userId={session?.user.id} setViewCreate={setViewCreate} />
       ) : (
-        <button
-          className="grad_btn mt-5 font-semibold"
-          onClick={() => setViewCreate(true)}>
-          {" "}
-          Add New Album
-        </button>
+        <div>
+          {!viewMode && (
+            <button
+              className="grad_btn mt-5 font-semibold"
+              onClick={() => setViewCreate(true)}>
+              {" "}
+              Add New Album
+            </button>
+          )}
+        </div>
       )}
     </section>
   );

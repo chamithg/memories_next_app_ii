@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import CreatePost from "@/components/CreatePost";
 import DisplayPosts from "@/components/DisplayPosts";
 import Loading from "@/components/Loading";
@@ -16,7 +17,10 @@ const Album = () => {
   const [viewDelete, setViewDelete] = useState({ view: false, data: "" });
   // for editing a post
   const [viewEdit, setViewEdit] = useState({ view: false, data: "" });
+  //
+  const [creator, setCreator] = useState("");
   const pathname = usePathname();
+  const { data: session } = useSession();
 
   useEffect(() => {
     setLoading(true);
@@ -24,7 +28,8 @@ const Album = () => {
       try {
         const response = await fetch(`/api${pathname}`);
         const data = await response.json();
-        setPosts(data);
+        setPosts(data.posts);
+        setCreator(data.creator);
       } catch (error) {
         console.log(error);
       } finally {
@@ -33,6 +38,9 @@ const Album = () => {
     };
     fetchPosts();
   }, [viewCreate, viewDelete, viewEdit]);
+
+  console.log(session?.user._id);
+  console.log(creator);
   return (
     <div className="w-10/12 mt-10 flex flex-col items-center">
       {loading && (
@@ -75,6 +83,11 @@ const Album = () => {
           {" "}
           + Add New Collection
         </button>
+      )}
+      {session?.user._id !== creator && (
+        <div>
+          <h1>it matchs</h1>
+        </div>
       )}
     </div>
   );

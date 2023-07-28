@@ -12,7 +12,6 @@ export const POST = async (req, res) => {
       coverImage: coverImage.base64,
       code: code,
     });
-    console.log(newAlbum.code);
     await newAlbum.save();
     return new Response(JSON.stringify(newAlbum), { status: 201 });
   } catch (error) {
