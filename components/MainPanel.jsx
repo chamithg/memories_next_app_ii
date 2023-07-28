@@ -34,7 +34,7 @@ const MainPanel = () => {
               width={100}
               height={100}
             />
-            <Link href="/profile" className="black_btn">
+            <Link href={`/${session?.user._id}`} className="black_btn">
               {" "}
               Continue as {session?.user.name} ?
             </Link>
@@ -54,8 +54,6 @@ const MainPanel = () => {
           </div>
         )}
       </div>
-
-      <button className="outline_btn mt-10 w-50 h-20"> View Memory</button>
     </div>
   );
 };
