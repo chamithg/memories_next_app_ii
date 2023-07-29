@@ -2,7 +2,7 @@
 import React from "react";
 import { useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { RiDeleteBin4Line } from "react-icons/ri";
 import { LuEdit3 } from "react-icons/lu";
 import { FiShare2 } from "react-icons/fi";
@@ -20,8 +20,9 @@ const AlbumIcon = ({
   const [editMode, setEditMode] = useState(false);
   const [shareMode, setShareMode] = useState({ view: false, data: "" });
   const router = useRouter();
+  const pathname = usePathname();
   const handleClick = () => {
-    router.push(`/profile/${data._id}`);
+    router.push(`${pathname}/${data._id}`);
   };
 
   return (

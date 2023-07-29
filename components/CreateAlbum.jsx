@@ -21,6 +21,7 @@ const CreateAlbum = ({ userId, setViewCreate }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(albumData);
     if (albumData.albumname && albumData.coverImage && albumData.desc) {
       try {
         const response = await fetch("/api/profile/newAlbum", {
@@ -44,7 +45,7 @@ const CreateAlbum = ({ userId, setViewCreate }) => {
         console.log(error);
       } finally {
         setViewCreate(false);
-        router.push("/profile");
+        // router.push("/profile");
       }
     } else {
       setShowValidation(true);
