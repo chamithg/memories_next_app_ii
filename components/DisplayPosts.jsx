@@ -10,6 +10,8 @@ import { FaRegEdit } from "react-icons/fa";
 import { LuEdit3 } from "react-icons/lu";
 import DeleteItem from "./DeleteItem";
 import EditImage from "./EditImage";
+import AddComment from "./AddComment";
+import { useSession } from "next-auth/react";
 
 const DisplayPosts = ({
   post,
@@ -27,7 +29,12 @@ const DisplayPosts = ({
   const [viewDelete, setViewDelete] = useState({ view: false, data: "" });
   // for editing an image
   const [viewEdit, setViewEdit] = useState({ view: false, data: "" });
+  // for commenting on image
+  const [viewComment, setViewComment] = useState({ view: false, data: "" });
+
   const [editMode, setEditMode] = useState(false);
+
+  const { data: session } = useSession();
 
   const fetchImages = async () => {
     setLoading(true);
@@ -44,7 +51,7 @@ const DisplayPosts = ({
 
   useEffect(() => {
     fetchImages();
-  }, [uploadView, viewDelete, viewEdit]);
+  }, [uploadView, viewDelete, viewEdit, viewComment]);
 
   return (
     <div className="w-full">
@@ -117,6 +124,8 @@ const DisplayPosts = ({
               viewEdit={viewEdit}
               setViewEdit={setViewEdit}
               viewMode={viewMode}
+              viewComment={viewComment}
+              setViewComment={setViewComment}
             />
           )}
           {uploadView ? (
@@ -135,6 +144,13 @@ const DisplayPosts = ({
           )}
           {viewEdit.view && (
             <EditImage viewEdit={viewEdit} setViewEdit={setViewEdit} />
+          )}
+          {viewComment.view && (
+            <AddComment
+              viewComment={viewComment}
+              setViewComment={setViewComment}
+              user={session?.user}
+            />
           )}
         </div>
       </div>

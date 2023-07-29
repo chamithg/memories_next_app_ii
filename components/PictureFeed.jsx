@@ -14,20 +14,28 @@ const ImageThumb = ({
   viewEdit,
   setViewEdit,
   viewMode,
+  viewComment,
+  setViewComment,
 }) => {
   const [editMode, setEditMode] = useState(false);
+  const [commentMode, setCommentMode] = useState(false);
   return (
     <div>
       <div className="relative shadow-md transition-all hover:scale-105 flex flex-col items-center">
-        <div className="absolute top-3 text-gray-600 left-3 flex flex-col gap-2 backdrop-blur-md p-2 rounded-md">
+        <div className="absolute bottom-3 text-gray-600 left-3 flex flex-col gap-2 backdrop-blur-lg p-2 rounded-xl">
           <div className="flex items-center gap-2">
             <AiOutlineHeart className="w-8 h-8" /> <h1>{image.likes.length}</h1>
           </div>
-          <div className="flex items-center gap-2">
+        </div>
+        <div className="absolute bottom-3 text-gray-600 right-3 flex flex-col gap-2 backdrop-blur-lg p-2 rounded-xl">
+          <div
+            className="flex items-center gap-2"
+            onClick={() => setViewComment({ view: true, data: image })}>
             <MdOutlineInsertComment className="w-8 h-8" />{" "}
             <h1>{image.comments.length}</h1>
           </div>
         </div>
+
         <div className="absolute top-3 right-3">
           {editMode ? (
             <div>
@@ -73,6 +81,8 @@ const PictureFeed = ({
   viewEdit,
   setViewEdit,
   viewMode,
+  viewComment,
+  setViewComment,
 }) => {
   return (
     <div>
@@ -85,6 +95,8 @@ const PictureFeed = ({
             viewEdit={viewEdit}
             setViewEdit={setViewEdit}
             viewMode={viewMode}
+            viewComment={viewComment}
+            setViewComment={setViewComment}
           />
         ))}
       </div>
