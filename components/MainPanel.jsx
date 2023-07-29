@@ -34,7 +34,7 @@ const MainPanel = () => {
               width={100}
               height={100}
             />
-            <Link href={`/${session?.user._id}`} className="black_btn">
+            <Link href={`/${session?.user.id}`} className="black_btn">
               {" "}
               Continue as {session?.user.name} ?
             </Link>

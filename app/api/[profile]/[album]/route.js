@@ -12,9 +12,12 @@ export const GET = async (request, { params }) => {
 
     const album = await Album.findById(params.album);
 
-    return new Response(JSON.stringify({ posts: posts, creator: album._id }), {
-      status: 200,
-    });
+    return new Response(
+      JSON.stringify({ posts: posts, creator: album.creator }),
+      {
+        status: 200,
+      }
+    );
   } catch (error) {
     return new Response("failed to fetch all posts", { status: 500 });
   }
@@ -59,7 +62,7 @@ export const PATCH = async (request, { params }) => {
     // Update the Album with new data
     existingAlbum.albumname = albumname;
     existingAlbum.desc = desc;
-    existingAlbum.coverImage = coverImage.base64;
+    existingAlbum.coverImage = coverImage;
     await existingAlbum.save();
     return new Response("Successfully updated the Albums", { status: 200 });
   } catch (error) {

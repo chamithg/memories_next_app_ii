@@ -43,11 +43,15 @@ const ImageThumb = ({
               </button>
             </div>
           ) : (
-            <button
-              className="hover:scale-105  hover:bg-blue-200 transition-all glassmorphism_4"
-              onClick={() => setEditMode(!editMode)}>
-              <FaRegEdit />
-            </button>
+            <div>
+              {!viewMode && (
+                <button
+                  className="hover:scale-105  hover:bg-blue-200 transition-all glassmorphism_4"
+                  onClick={() => setEditMode(!editMode)}>
+                  <FaRegEdit />
+                </button>
+              )}
+            </div>
           )}
         </div>
 
@@ -80,6 +84,7 @@ const PictureFeed = ({
             setViewDelete={setViewDelete}
             viewEdit={viewEdit}
             setViewEdit={setViewEdit}
+            viewMode={viewMode}
           />
         ))}
       </div>

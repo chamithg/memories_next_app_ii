@@ -19,28 +19,39 @@ const Album = () => {
   const [viewEdit, setViewEdit] = useState({ view: false, data: "" });
   //
   const [creator, setCreator] = useState("");
+  const [viewMode, setViewMode] = useState(false);
   const pathname = usePathname();
+  const path = pathname.split("/");
   const { data: session } = useSession();
+
+  pathname.split("/")[1];
 
   useEffect(() => {
     setLoading(true);
+
     const fetchPosts = async () => {
       try {
         const response = await fetch(`/api${pathname}`);
         const data = await response.json();
+        if (path[1] === data.creator) {
+          setViewMode(false);
+        } else {
+          setViewMode(true);
+        }
+        console.log(path[1], creator);
+        console.log(viewMode);
         setPosts(data.posts);
-        setCreator(data.creator);
       } catch (error) {
         console.log(error);
       } finally {
         setLoading(false);
+
+        console.log(viewMode);
       }
     };
     fetchPosts();
   }, [viewCreate, viewDelete, viewEdit]);
 
-  console.log(session?.user._id);
-  console.log(creator);
   return (
     <div className="w-10/12 mt-10 flex flex-col items-center">
       {loading && (
@@ -74,19 +85,19 @@ const Album = () => {
             setViewDelete={setViewDelete}
             viewEdit={viewEdit}
             setViewEdit={setViewEdit}
+            viewMode={viewMode}
           />
         ))}
       {viewCreate ? (
         <CreatePost pathname={pathname} setViewCreate={setViewCreate} />
       ) : (
-        <button className="grad_btn" onClick={() => setViewCreate(true)}>
-          {" "}
-          + Add New Collection
-        </button>
-      )}
-      {session?.user._id !== creator && (
         <div>
-          <h1>it matchs</h1>
+          {!viewMode && (
+            <button className="grad_btn" onClick={() => setViewCreate(true)}>
+              {" "}
+              + Add New Collection
+            </button>
+          )}
         </div>
       )}
     </div>
