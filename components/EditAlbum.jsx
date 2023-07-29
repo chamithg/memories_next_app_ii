@@ -12,12 +12,14 @@ const EditAlbum = ({ viewEdit, setViewEdit }) => {
     desc: viewEdit.data.desc,
     coverImage: viewEdit.data.coverImage,
   });
+  console.log(albumData);
 
   const [showValidations, setShowValidation] = useState(false);
 
   const router = useRouter();
 
   const handleSubmit = async (e) => {
+    console.log(albumData);
     e.preventDefault();
     if (albumData.albumname && albumData.coverImage && albumData.desc) {
       try {
@@ -40,7 +42,7 @@ const EditAlbum = ({ viewEdit, setViewEdit }) => {
         console.log(error);
       } finally {
         setViewEdit(false);
-        router.push("/profile");
+        // router.push("/profile");
       }
     } else {
       setShowValidation(true);
@@ -111,13 +113,13 @@ const EditAlbum = ({ viewEdit, setViewEdit }) => {
             type="file"
             multiple={false}
             onDone={(base64) =>
-              setAlbumData({ ...albumData, coverImage: base64 })
+              setAlbumData({ ...albumData, coverImage: base64.base64 })
             }
           />
         </div>
 
         <Image
-          src={albumData.coverImage.base64 || viewEdit.data.coverImage}
+          src={albumData?.coverImage}
           className="m-5"
           width={100}
           height={100}

@@ -42,7 +42,7 @@ export const PATCH = async (request, { params }) => {
       return new Response("Image not found", { status: 404 });
     }
     // Update the Album with new data
-    existingImage.image = image.base64;
+    existingImage.image = image;
     existingImage.caption = caption;
     await existingImage.save();
     return new Response("Successfully updated the Image", { status: 200 });

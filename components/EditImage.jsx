@@ -53,7 +53,7 @@ const EditImage = ({ viewEdit, setViewEdit }) => {
               <div className="absolute  top-0 left-2 w-32 h-32 flex flex-col gap-2">
                 <AiOutlineCloudUpload className="z-50 w-7 h-7" />
                 <Image
-                  src={uploadImage.image.base64 || viewEdit.data.image}
+                  src={uploadImage?.image}
                   className="m-5"
                   width={100}
                   height={100}
@@ -65,7 +65,7 @@ const EditImage = ({ viewEdit, setViewEdit }) => {
                   type="file"
                   multiple={false}
                   onDone={(base64) =>
-                    setUploadImage({ ...uploadImage, image: base64 })
+                    setUploadImage({ ...uploadImage, image: base64.base64 })
                   }></FileBase>
               </div>
             </div>
