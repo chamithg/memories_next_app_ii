@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import { RiDeleteBin4Line } from "react-icons/ri";
 import { FaRegEdit } from "react-icons/fa";
 import { LuEdit3 } from "react-icons/lu";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { MdOutlineInsertComment } from "react-icons/md";
+import { useSession } from "next-auth/react";
 
 import Image from "next/image";
 
@@ -16,15 +17,25 @@ const ImageThumb = ({
   viewMode,
   viewComment,
   setViewComment,
+  likeImage,
 }) => {
   const [editMode, setEditMode] = useState(false);
   const [commentMode, setCommentMode] = useState(false);
+  const { data: session } = useSession();
+  console.log(session);
   return (
     <div>
       <div className="relative shadow-md transition-all hover:scale-105 flex flex-col items-center">
         <div className="absolute bottom-3 text-gray-600 left-3 flex flex-col gap-2 backdrop-blur-lg p-2 rounded-xl">
-          <div className="flex items-center gap-2">
-            <AiOutlineHeart className="w-8 h-8" /> <h1>{image.likes.length}</h1>
+          <div
+            className="flex items-center gap-2"
+            onClick={() => likeImage(image._id)}>
+            {image.likes.includes(session.user.id) ? (
+              <AiFillHeart className="w-8 h-8 text-red-600" />
+            ) : (
+              <AiOutlineHeart className="w-8 h-8" />
+            )}
+            <h1>{image.likes.length}</h1>
           </div>
         </div>
         <div className="absolute bottom-3 text-gray-600 right-3 flex flex-col gap-2 backdrop-blur-lg p-2 rounded-xl">
@@ -83,6 +94,7 @@ const PictureFeed = ({
   viewMode,
   viewComment,
   setViewComment,
+  likeImage,
 }) => {
   return (
     <div>
@@ -97,6 +109,7 @@ const PictureFeed = ({
             viewMode={viewMode}
             viewComment={viewComment}
             setViewComment={setViewComment}
+            likeImage={likeImage}
           />
         ))}
       </div>

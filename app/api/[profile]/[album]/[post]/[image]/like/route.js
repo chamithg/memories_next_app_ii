@@ -1,9 +1,9 @@
 import { connectToDB } from "@/utils/database";
 import Image from "@/models/image";
 
-// Add Comment image -->
+// Add Like image -->
 export const PATCH = async (request, { params }) => {
-  const { commenter, contex, image } = await request.json();
+  const { commenter } = await request.json();
   try {
     await connectToDB();
     // Find the existing Album by ID
@@ -12,7 +12,10 @@ export const PATCH = async (request, { params }) => {
       return new Response("Image not found", { status: 404 });
     }
     // Update the Album with new data
-    existingImage.comments.push(image + ":>" + commenter + ":>" + contex);
+    if (!existingImage.likes.includes(commenter)) {
+      existingImage.likes.push(commenter);
+    }
+
     await existingImage.save();
     return new Response("Successfully Added comment", { status: 200 });
   } catch (error) {
