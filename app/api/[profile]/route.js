@@ -19,11 +19,15 @@ export const GET = async (request, { params }) => {
 
     //iterate over the albums array and fetch each shred albums, push them to shared albums array
     for (let i = 0; i < user.albums.length; i++) {
-      const foundAlbum = await Album.findById(user.albums[i]);
+      const foundAlbum = await Album.findById(user.albums[i]).populate(
+        "creator"
+      );
       if (foundAlbum) {
         sharedAlbums.push(foundAlbum);
       }
     }
+
+    console.log(sharedAlbums);
 
     return new Response(
       JSON.stringify({ albums: albums, sharedAlbums: sharedAlbums }),
