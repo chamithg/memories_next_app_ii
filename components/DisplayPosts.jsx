@@ -31,6 +31,8 @@ const DisplayPosts = ({
   const [viewEdit, setViewEdit] = useState({ view: false, data: "" });
   // for commenting on image
   const [viewComment, setViewComment] = useState({ view: false, data: "" });
+  // for like an image
+  const [addingLike, setAddingLike] = useState(false);
 
   const [editMode, setEditMode] = useState(false);
 
@@ -51,7 +53,27 @@ const DisplayPosts = ({
 
   useEffect(() => {
     fetchImages();
-  }, [uploadView, viewDelete, viewEdit, viewComment]);
+  }, [uploadView, viewDelete, viewEdit, viewComment, addingLike]);
+
+  // like an image
+  const likeImage = async (image) => {
+    console.log("this is image" + image._id);
+    try {
+      const response = await fetch(`/api/profile/album/post/${image}/like`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          commenter: session.user.id,
+          image: image,
+        }),
+      });
+      if (response.ok) {
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setAddingLike(!addingLike);
+    }
+  };
 
   return (
     <div className="w-full">
@@ -126,6 +148,7 @@ const DisplayPosts = ({
               viewMode={viewMode}
               viewComment={viewComment}
               setViewComment={setViewComment}
+              likeImage={likeImage}
             />
           )}
           {uploadView ? (

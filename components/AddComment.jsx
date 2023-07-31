@@ -23,6 +23,7 @@ const AddComment = ({ viewComment, setViewComment, user }) => {
           method: "PATCH",
           body: JSON.stringify({
             commenter: user.name,
+            image: user.image,
             contex: comment,
           }),
         }
@@ -32,7 +33,6 @@ const AddComment = ({ viewComment, setViewComment, user }) => {
         alert("comment has been added");
       }
     } catch (error) {
-      console.log("sumbitting failsed");
       console.log(error);
     } finally {
       setViewComment({
@@ -45,11 +45,11 @@ const AddComment = ({ viewComment, setViewComment, user }) => {
   return (
     <div className="transition ease-in-out delay-150 fixed z-50 top-0 left-0 h-screen w-screen backdrop-blur-2xl">
       <form
-        className="glassmorphism fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 shadow-md w-96"
+        className="glassmorphism fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 shadow-md w-96 max-h-full"
         onSubmit={(e) => handleSubmit(e)}>
         <div className="flex flex-between items-center justify-center mb-5">
           <h1 className="text-lg font-semibold pink_gradient font-satoshi ">
-            Comments
+            Comments of{" "}
             <span className="blue_gradient text-lg">
               {viewComment.data.caption}
             </span>
@@ -72,9 +72,27 @@ const AddComment = ({ viewComment, setViewComment, user }) => {
             alt="uploaded_images"
           />
         </div>
-        <div>
+        <div className="max-h-60 overflow-y-scroll scrollbar-hide m-2">
           {viewComment.data.comments.map((comment) => (
-            <h1>{comment}</h1>
+            <div className="p-2 bg-gray-300 m-2 h-fit rounded-md shadow-lg w-auto">
+              <div className="flex items-center ">
+                <Image
+                  src={`${comment.split(":>")[0]}`}
+                  alt="profile"
+                  className="rounded-full"
+                  width={45}
+                  height={45}
+                />
+                <div className="">
+                  <h1 className="ml-2 blue_gradient font-satoshi font-semibold capitalize text-lg">
+                    {comment.split(":>")[1] + ":"}
+                  </h1>
+                  <p className="ml-5 font-mono break-words  text-base w-60">
+                    {comment.split(":>")[2]}
+                  </p>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
         <textarea

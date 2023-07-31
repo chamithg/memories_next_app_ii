@@ -32,9 +32,9 @@ const AlbumIcon = ({
           <ShareAlbum shareMode={shareMode} setShareMode={setShareMode} />
         )}
       </div>
-      <div className="mt-5 static prompt_card transition-all hover:border-4 flex flex-col items-center">
+      <div className="mt-5 static prompt_card transition-all flex flex-col items-center">
         {!viewMode && (
-          <div className="absolute top-3 right-3">
+          <div className="z-50 absolute top-3 right-3">
             {editMode ? (
               <div>
                 <button
@@ -70,22 +70,25 @@ const AlbumIcon = ({
             )}
           </div>
         )}
-
-        <Image
-          onClick={handleClick}
-          className="rounded"
-          width={400}
-          height={400}
-          src={data?.coverImage}
-          alt="album_cover"
-        />
-        <div className="items-start w-11/12 overflow-hidden">
-          <div className="flex justify-center font-chewy f text-center">
-            {data?.albumname}
+        <div className="group">
+          <Image
+            onClick={handleClick}
+            className="rounded transition-all duration-700 group-hover:scale-105 w-full"
+            width={400}
+            height={400}
+            src={data?.coverImage}
+            alt="album_cover"
+          />
+          <div className="absolute transition-all duration-700 group-hover:bottom-0 -bottom-[calc(0%_-_5rem)]   group-hover:bg-opacity-75 group-hover:bg-gray-700 items-start w-full overflow-hidden p-2">
+            <div className="flex text-3xl text-white mb-3 font-semibold drop-shadow-2xl font-satoshi capitalize justify-center  text-center">
+              {data?.albumname}
+            </div>
+            <div className="justify-center items-center">
+              <p className="text-2xl text-center capitalize text-white font-mono break-words w-fit max-w-full">
+                {data?.desc}
+              </p>
+            </div>
           </div>
-          <p className="text-gray-700 text-center text-base max-w-fit">
-            {data?.desc}
-          </p>
         </div>
       </div>
     </>
