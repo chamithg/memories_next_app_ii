@@ -79,12 +79,13 @@ const AlbumIcon = ({
             src={data?.coverImage}
             alt="album_cover"
           />
-          <div className="absolute transition-all duration-700 group-hover:bottom-0 -bottom-[calc(0%_-_5rem)]   group-hover:bg-opacity-75 group-hover:bg-gray-700 items-start w-full overflow-hidden p-2">
-            <div className="flex text-3xl text-white mb-3 font-semibold drop-shadow-2xl font-satoshi capitalize justify-center  text-center">
+          {/* group-hover:-bottom-0 */}
+          <div className="absolute transition-all duration-700 -bottom-full group-hover:bg-opacity-75 group-hover:bg-gray-700 items-start w-full overflow-hidden p-2">
+            <div className="flex text-3xl text-white mb-3 top-5 font-semibold drop-shadow-2xl font-satoshi capitalize justify-center  text-center">
               {data?.albumname}
             </div>
-            <div className="justify-center items-center">
-              <p className="text-2xl text-center capitalize text-white font-mono break-words w-fit max-w-full">
+            <div className="transition-all duration-700 justify-center items-center">
+              <p className="text-2xl text-center capitalize  text-white font-mono break-words w-fit max-w-full">
                 {data?.desc}
               </p>
             </div>
