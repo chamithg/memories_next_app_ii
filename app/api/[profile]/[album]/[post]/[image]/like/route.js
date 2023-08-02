@@ -14,6 +14,10 @@ export const PATCH = async (request, { params }) => {
     // Update the Album with new data
     if (!existingImage.likes.includes(commenter)) {
       existingImage.likes.push(commenter);
+    } else {
+      existingImage.likes = existingImage.likes.filter(
+        (item) => item !== commenter
+      );
     }
 
     await existingImage.save();

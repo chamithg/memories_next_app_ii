@@ -80,12 +80,19 @@ const AlbumIcon = ({
             alt="album_cover"
           />
           {/* group-hover:-bottom-0 */}
-          <div className="absolute transition-all duration-700 -bottom-full group-hover:bg-opacity-75 group-hover:bg-gray-700 items-start w-full overflow-hidden p-2">
-            <div className="flex text-3xl text-white mb-3 top-5 font-semibold drop-shadow-2xl font-satoshi capitalize justify-center  text-center">
+          {viewMode && (
+            <div className="z-100 transition-all duration-700 absolute group-hover:scale-105 top-3 left-1/2 -translate-x-1/2 bg-gray-700 opacity-50 p-1 rounded-full">
+              <h1 className="font-chewy text-white">
+                Shared By : {data.creator.username}{" "}
+              </h1>
+            </div>
+          )}
+          <div className="absolute transition-all duration-700  top-full -translate-y-12 group-hover:-translate-y-full bg-gradient-to-t from-gray-500 bg-opacity-25    group-hover:bg-opacity-75 group-hover:bg-gray-700 items-start w-full overflow-hidden p-2">
+            <div className="flex text-3xl text-indigo-100 mb-3 top-5 font-semibold drop-shadow-2xl font-satoshi capitalize justify-center  text-center">
               {data?.albumname}
             </div>
             <div className="transition-all duration-700 justify-center items-center">
-              <p className="text-2xl text-center capitalize  text-white font-mono break-words w-fit max-w-full">
+              <p className="text-xl text-center capitalize  texs font-mono break-words w-fit max-w-full">
                 {data?.desc}
               </p>
             </div>
