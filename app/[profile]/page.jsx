@@ -43,8 +43,8 @@ const ProfilePage = () => {
   }, [session?.user.id, viewCreate, viewDelete, viewEdit]);
 
   return (
-    <section className="flex flex-col w-screen items-center">
-      <div className="flex w-2/3  h-20 items-center justify-center gap-4">
+    <section className="flex flex-col w-screen items-center mt-32">
+      <div className=" z-50 flex w-2/3 fixed mb-5  h-20 items-center justify-center gap-4">
         <button
           className={`rounded-md flex-auto ${
             viewMode ? "outline_btn_1" : "grad_btn_1"

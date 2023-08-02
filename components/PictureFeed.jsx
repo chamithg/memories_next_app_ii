@@ -25,8 +25,8 @@ const ImageThumb = ({
   console.log(session);
   return (
     <div>
-      <div className="relative shadow-md transition-all hover:scale-105 flex flex-col items-center">
-        <div className="absolute bottom-3 text-gray-600 left-3 flex flex-col gap-2 backdrop-blur-lg p-2 rounded-xl">
+      <div className="relative shadow-xl transition-all delay-700 w-full h-auto overflow-hidden rounded-lg  flex flex-col items-center">
+        <div className="z-50 absolute bottom-3 text-gray-600 left-3 flex flex-col gap-2 backdrop-blur-lg p-2 rounded-xl">
           <div
             className="flex items-center gap-2"
             onClick={() => likeImage(image._id)}>
@@ -38,7 +38,7 @@ const ImageThumb = ({
             <h1>{image.likes.length}</h1>
           </div>
         </div>
-        <div className="absolute bottom-3 text-gray-600 right-3 flex flex-col gap-2 backdrop-blur-lg p-2 rounded-xl">
+        <div className="z-50 absolute bottom-3 text-gray-600 right-3 flex flex-col gap-2 backdrop-blur-lg p-2 rounded-xl">
           <div
             className="flex items-center gap-2"
             onClick={() => setViewComment({ view: true, data: image })}>
@@ -47,7 +47,7 @@ const ImageThumb = ({
           </div>
         </div>
 
-        <div className="absolute top-3 right-3">
+        <div className="z-50 absolute top-3 right-3">
           {editMode ? (
             <div>
               <button
@@ -62,10 +62,10 @@ const ImageThumb = ({
               </button>
             </div>
           ) : (
-            <div>
+            <div className="z-100">
               {!viewMode && (
                 <button
-                  className="hover:scale-105  hover:bg-blue-200 transition-all glassmorphism_4"
+                  className="z-100 hover:scale-105  hover:bg-blue-200 transition-all glassmorphism_4"
                   onClick={() => setEditMode(!editMode)}>
                   <FaRegEdit />
                 </button>
@@ -75,7 +75,7 @@ const ImageThumb = ({
         </div>
 
         <Image
-          className="rounded"
+          className="rounded transition-all w-full duration-700 hover:scale-105"
           width={300}
           height={300}
           src={image.image}
