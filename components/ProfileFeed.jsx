@@ -38,7 +38,7 @@ const AlbumIcon = ({
             {editMode ? (
               <div>
                 <button
-                  className="hover:scale-105   hover:bg-green-200 transition-all glassmorphism_2 "
+                  className="hover:scale-105 hover:bg-green-200 transition-all glassmorphism_2 "
                   onClick={() =>
                     setViewEdit({ ...viewEdit, view: true, data: data })
                   }>

@@ -5,6 +5,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { LuEdit3 } from "react-icons/lu";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { MdOutlineInsertComment } from "react-icons/md";
+import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
 import { useSession } from "next-auth/react";
 
 import Image from "next/image";
@@ -26,28 +27,32 @@ const ImageThumb = ({
   return (
     <div>
       <div className="relative shadow-xl transition-all delay-700 w-full h-auto overflow-hidden rounded-lg  flex flex-col items-center">
-        <div className="z-50 absolute bottom-3 text-gray-600 left-3 flex flex-col gap-2 backdrop-blur-lg p-2 rounded-xl">
+        <div className=" z-30 absolute bottom-3  left-3 flex flex-col gap-2 backdrop-blur-lg p-0.5 rounded-lg">
           <div
             className="flex items-center gap-2"
             onClick={() => likeImage(image._id)}>
             {image.likes.includes(session.user.id) ? (
-              <AiFillHeart className="w-8 h-8 text-red-600" />
+              <AiFillHeart className=" transition-all delay-200 w-6 h-6 hover:scale-105 text-red-600" />
             ) : (
-              <AiOutlineHeart className="w-8 h-8" />
+              <AiOutlineHeart className="text-gray-700 mix-blend-difference transition-all delay-200 w-6 h-6 hover:scale-105" />
             )}
-            <h1>{image.likes.length}</h1>
+            <h1 className="gray_gradient mix-blend-difference">
+              {image.likes.length}
+            </h1>
           </div>
         </div>
-        <div className="z-50 absolute bottom-3 text-gray-600 right-3 flex flex-col gap-2 backdrop-blur-lg p-2 rounded-xl">
+        <div className="z-30 absolute bottom-3 text-gray-600 right-3 flex flex-col gap-2 backdrop-blur-lg p-0.5 rounded-lg">
           <div
             className="flex items-center gap-2"
             onClick={() => setViewComment({ view: true, data: image })}>
-            <MdOutlineInsertComment className="w-8 h-8" />{" "}
-            <h1>{image.comments.length}</h1>
+            <MdOutlineInsertComment className="text-gray-700 mix-blend-difference transition-all delay-200 w-6 h-6 hover:scale-105" />{" "}
+            <h1 className="gray_gradient mix-blend-difference">
+              {image.comments.length}
+            </h1>
           </div>
         </div>
 
-        <div className="z-50 absolute top-3 right-3">
+        <div className="z-30 absolute top-3 right-3">
           {editMode ? (
             <div>
               <button
@@ -62,12 +67,12 @@ const ImageThumb = ({
               </button>
             </div>
           ) : (
-            <div className="z-100">
+            <div className="z-30">
               {!viewMode && (
                 <button
-                  className="z-100 hover:scale-105  hover:bg-blue-200 transition-all glassmorphism_4"
+                  className="z-100 hover:scale-105  hover:bg-blue-200 transition-all glassmorphism_4_1"
                   onClick={() => setEditMode(!editMode)}>
-                  <FaRegEdit />
+                  <PiDotsThreeOutlineVerticalFill />
                 </button>
               )}
             </div>

@@ -53,7 +53,7 @@ const Album = () => {
   }, [viewCreate, viewDelete, viewEdit]);
 
   return (
-    <div className="w-10/12 mt-10 flex flex-col items-center">
+    <div className="w-10/12 mt-32 flex flex-col items-center">
       {loading && (
         <div className="flex gap-2 justify-center items-center">
           <Loading />
@@ -93,7 +93,9 @@ const Album = () => {
       ) : (
         <div>
           {!viewMode && (
-            <button className="grad_btn" onClick={() => setViewCreate(true)}>
+            <button
+              className="grad_btn fixed bottom-3 left-screen/2 -translate-x-1/2 shadow-2xl"
+              onClick={() => setViewCreate(true)}>
               {" "}
               + Add New Collection
             </button>
