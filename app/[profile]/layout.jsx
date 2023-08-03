@@ -3,6 +3,8 @@ import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { MdOutlineArrowBackIos } from "react-icons/md";
+import { GoSignOut } from "react-icons/go";
+
 import { useEffect } from "react";
 
 function ProfileLayout({ children }) {
@@ -15,14 +17,14 @@ function ProfileLayout({ children }) {
 
   return (
     <>
-      <div className=" fixed top-0 z-50 flex justify-center w-screen h-fit bg-gradient-to-b from-zinc-200 to-transparent">
-        <div className="z-50 flex justify-between w-2/3 h-fit  top-0">
-          <div className="w-auto">
+      <div className=" fixed top-0 z-50 flex justify-center w-screen h-fit bg-gradient-to-b  from-zinc-200 from-0%  via-zinc-200 via-50% to-transparent to-80%">
+        <div className="z-50 flex lg:justify-between justify-center w-2/3 mt-2 mb-5 top-0">
+          <div className="w-auto hidden lg:block">
             <img src="/assets/images/memories.png" className="h-32 w-fit" />
           </div>
 
-          <div className="flex flex-row items-center gap-2">
-            <button className="grad_btn_pink" onClick={() => router.back()}>
+          <div className="flex flex-row lg:items-center gap-2">
+            <button className="grad_btn_pink h-7" onClick={() => router.back()}>
               <MdOutlineArrowBackIos />
             </button>
 
@@ -37,13 +39,13 @@ function ProfileLayout({ children }) {
               height={50}
             />
             <button
-              type="button"
+              type="button h-7"
               onClick={() => {
                 signOut;
                 router.push("/");
               }}
               className="outline_btn">
-              Sign Out
+              <GoSignOut />
             </button>
             <div>{/* <p>{session?.user.email}</p> */}</div>
           </div>

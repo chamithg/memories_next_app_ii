@@ -19,13 +19,18 @@ const MainPanel = () => {
 
   return (
     <div className="mt-10 flex flex-col items-center ">
-      <button
-        className="grad_btn mt-10 w-50 h-20"
-        onClick={() => setViewSign(true)}>
-        Create Memory
-      </button>
-      <div className={!viewSign && !session?.user ? "hidden" : ""}>
-        {session?.user ? (
+      {!session?.user && (
+        <div>
+          <button
+            className="grad_btn bg-black  mt-10 w-50 h-10"
+            onClick={() => signIn(providers.id)}>
+            Sign in
+          </button>
+        </div>
+      )}
+
+      <div className={!session?.user ? "hidden" : ""}>
+        {session?.user && (
           <div className="flex  flex-col items-center gap-3 md:gap-5">
             <Image
               src={session?.user.image}
@@ -43,14 +48,6 @@ const MainPanel = () => {
               Sign Out
             </button>
             <Link href="/profile"></Link>
-          </div>
-        ) : (
-          <div>
-            <button
-              className="black_btn bg-black  mt-10 w-50 h-10"
-              onClick={() => signIn(providers.id)}>
-              Sign in
-            </button>
           </div>
         )}
       </div>

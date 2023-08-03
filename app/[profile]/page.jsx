@@ -44,7 +44,7 @@ const ProfilePage = () => {
 
   return (
     <section className="flex flex-col w-screen items-center mt-32">
-      <div className=" z-50 flex w-2/3 fixed mb-5  h-20 items-center justify-center gap-4">
+      <div className="flex w-2/3  h-20 items-center justify-center gap-4">
         <button
           className={`rounded-md flex-auto ${
             viewMode ? "outline_btn_1" : "grad_btn_1"
@@ -98,7 +98,7 @@ const ProfilePage = () => {
         <div>
           {!viewMode && (
             <button
-              className="grad_btn mt-5 font-semibold"
+              className="grad_btn mt-5 font-semibold fixed bottom-3 left-screen/2 -translate-x-1/2 shadow-2xl "
               onClick={() => setViewCreate(true)}>
               {" "}
               Add New Album
