@@ -79,6 +79,12 @@ const ImageThumb = ({
           )}
         </div>
 
+        <div className="absolute bottom-10 z-30 bg-slate-800 bg-opacity-25 px-2 rounded-full">
+          <h1 className=" font-mono drop-shadow-2xl  text-gray-300">
+            {image.caption}
+          </h1>
+        </div>
+
         <Image
           className="rounded transition-all w-full duration-700 hover:scale-105"
           width={300}
