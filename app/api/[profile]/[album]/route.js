@@ -13,7 +13,11 @@ export const GET = async (request, { params }) => {
     const album = await Album.findById(params.album);
 
     return new Response(
-      JSON.stringify({ posts: posts, creator: album.creator }),
+      JSON.stringify({
+        posts: posts,
+        creator: album.creator,
+        albumname: album.albumname,
+      }),
       {
         status: 200,
       }
