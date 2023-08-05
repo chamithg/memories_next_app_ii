@@ -19,6 +19,7 @@ const Album = () => {
   const [viewEdit, setViewEdit] = useState({ view: false, data: "" });
   //
   const [creator, setCreator] = useState("");
+  const [albumName, setAlbumName] = useState("");
   const [viewMode, setViewMode] = useState(false);
   const pathname = usePathname();
   const path = pathname.split("/");
@@ -38,15 +39,12 @@ const Album = () => {
         } else {
           setViewMode(true);
         }
-        console.log(path[1], creator);
-        console.log(viewMode);
         setPosts(data.posts);
+        setAlbumName(data.albumname);
       } catch (error) {
         console.log(error);
       } finally {
         setLoading(false);
-
-        console.log(viewMode);
       }
     };
     fetchPosts();
@@ -75,6 +73,13 @@ const Album = () => {
       {/* this is for post/collection edit */}
       {viewEdit.view && (
         <EditPost viewEdit={viewEdit} setViewEdit={setViewEdit} />
+      )}
+      {albumName && (
+        <div className="">
+          <h1 className="p-2 pink_gradient font-chewy text-5xl">
+            Album : {albumName}
+          </h1>
+        </div>
       )}
       {posts &&
         posts.map((post) => (
