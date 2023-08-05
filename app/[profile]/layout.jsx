@@ -28,13 +28,13 @@ function ProfileLayout({ children }) {
               <MdOutlineArrowBackIos />
             </button>
 
-            <h1 className=" text-3xl font-chewy blue_gradient capitalize">
+            <h1 className="hidden lg:block text-3xl font-chewy blue_gradient capitalize">
               {" Hi " + session?.user.name.split(" ")[0] + "!"}
             </h1>
             <Image
               src={session?.user.image}
               alt="profile"
-              className="rounded-full"
+              className="rounded-full h-7 w-7 lg:h-10 lg:w-10"
               width={50}
               height={50}
             />
@@ -44,7 +44,7 @@ function ProfileLayout({ children }) {
                 signOut;
                 router.push("/");
               }}
-              className="outline_btn">
+              className="outline_btn h-7">
               <GoSignOut />
             </button>
             <div>{/* <p>{session?.user.email}</p> */}</div>

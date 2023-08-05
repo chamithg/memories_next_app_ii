@@ -6,6 +6,7 @@ import { LuEdit3 } from "react-icons/lu";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { MdOutlineInsertComment } from "react-icons/md";
 import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
+
 import { useSession } from "next-auth/react";
 
 import Image from "next/image";
@@ -27,7 +28,7 @@ const ImageThumb = ({
   return (
     <div>
       <div className="relative shadow-xl transition-all delay-700 w-full h-auto overflow-hidden rounded-lg  flex flex-col items-center">
-        <div className=" z-30 absolute bottom-3  left-3 flex flex-col gap-2 backdrop-blur-lg p-0.5 rounded-lg">
+        <div className="z-30 absolute bottom-3  left-3 flex flex-col gap-2 backdrop-blur-lg p-0.5 rounded-lg">
           <div
             className="flex items-center gap-2"
             onClick={() => likeImage(image._id)}>
@@ -79,7 +80,7 @@ const ImageThumb = ({
           )}
         </div>
 
-        <div className="absolute bottom-10 z-30 bg-slate-800 bg-opacity-25 px-2 rounded-full">
+        <div className="absolute bottom-10 z-30 bg-slate-800 bg-opacity-50 px-2 rounded-full">
           <h1 className=" font-mono drop-shadow-2xl  text-gray-300">
             {image.caption}
           </h1>

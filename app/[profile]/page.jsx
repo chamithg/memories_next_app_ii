@@ -43,7 +43,7 @@ const ProfilePage = () => {
   }, [session?.user.id, viewCreate, viewDelete, viewEdit]);
 
   return (
-    <section className="flex flex-col w-screen items-center mt-32">
+    <section className="flex flex-col w-screen items-center mt-16 lg:mt-32 ">
       <div className="flex w-2/3  h-20 items-center justify-center gap-4">
         <button
           className={`rounded-md flex-auto ${
