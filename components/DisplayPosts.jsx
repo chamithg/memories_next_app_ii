@@ -8,6 +8,9 @@ import ImageCarousel from "./ImageCarousel";
 import { RiDeleteBin4Line } from "react-icons/ri";
 import { FaRegEdit } from "react-icons/fa";
 import { LuEdit3 } from "react-icons/lu";
+import { TfiLayoutSlider } from "react-icons/tfi";
+import { BsGrid } from "react-icons/bs";
+
 import DeleteItem from "./DeleteItem";
 import EditImage from "./EditImage";
 import AddComment from "./AddComment";
@@ -100,7 +103,7 @@ const DisplayPosts = ({
               className="grad_btn_pink"
               onClick={() => setSlideView(!slideView)}>
               {" "}
-              {slideView ? "Thumbnails" : "Slide View"}
+              {slideView ? <BsGrid /> : <TfiLayoutSlider />}
             </button>
             {editMode ? (
               <div>
