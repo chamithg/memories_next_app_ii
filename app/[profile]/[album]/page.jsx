@@ -51,7 +51,7 @@ const Album = () => {
   }, [viewCreate, viewDelete, viewEdit]);
 
   return (
-    <div className="w-10/12 mt-32 flex flex-col items-center">
+    <div className="w-screen-2/3 mt-16 lg:mt-32 flex flex-col items-center">
       {loading && (
         <div className="flex gap-2 justify-center items-center">
           <Loading />
