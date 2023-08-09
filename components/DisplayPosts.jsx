@@ -141,7 +141,10 @@ const DisplayPosts = ({
           {loading ? (
             <Loading />
           ) : slideView ? (
-            <ImageCarousel images={collectionImages} />
+            <ImageCarousel
+              images={collectionImages}
+              viewComment={viewComment}
+            />
           ) : (
             <PictureFeed
               images={collectionImages}
