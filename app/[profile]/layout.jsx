@@ -17,7 +17,7 @@ function ProfileLayout({ children }) {
 
   return (
     <>
-      <div className=" fixed top-0 z-50 flex justify-center w-screen h-fit bg-gradient-to-b  from-zinc-200 from-0%  via-zinc-200 via-50% to-transparent to-80%">
+      <div className=" fixed top-0 z-40 flex justify-center w-screen h-fit bg-gradient-to-b  from-zinc-200 from-0%  via-zinc-200 via-50% to-transparent to-80%">
         <div className="z-50 flex lg:justify-between justify-center w-2/3 mt-2 mb-5 top-0">
           <div className="w-auto hidden lg:block">
             <img src="/assets/images/memories.png" className="h-32 w-fit" />

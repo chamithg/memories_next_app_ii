@@ -144,6 +144,7 @@ const DisplayPosts = ({
             <ImageCarousel
               images={collectionImages}
               viewComment={viewComment}
+              setSlideView={setSlideView}
             />
           ) : (
             <PictureFeed
