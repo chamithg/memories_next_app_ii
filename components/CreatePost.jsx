@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import { MdOutlineClear } from "react-icons/md";
 
 const CreatePost = ({ pathname, setViewCreate }) => {
   const albumId = pathname.split("/")[2];
@@ -44,9 +45,17 @@ const CreatePost = ({ pathname, setViewCreate }) => {
       <form
         className="glassmorphism fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 shadow-md w-96"
         onSubmit={(e) => handleSubmit(e)}>
-        <h1 className="text-2xl font-semibold pink_gradient font-satoshi mb-10">
-          Create Collection
-        </h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-semibold pink_gradient font-satoshi mb-10">
+            Create Collection
+          </h1>
+          <button
+            className="hover:bg-red-400 h-6 w-6 p-1 rounded-full transition-all mb-10"
+            onClick={() => setViewCreate(false)}>
+            <MdOutlineClear />
+          </button>
+        </div>
+
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
             Collection Name

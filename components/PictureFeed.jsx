@@ -24,7 +24,7 @@ const ImageThumb = ({
   const [editMode, setEditMode] = useState(false);
   const [commentMode, setCommentMode] = useState(false);
   const { data: session } = useSession();
-  console.log(session);
+
   return (
     <div>
       <div className="relative shadow-xl transition-all delay-700 w-full h-auto overflow-hidden rounded-lg  flex flex-col items-center">
