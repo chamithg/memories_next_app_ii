@@ -5,9 +5,9 @@ import { BsGrid } from "react-icons/bs";
 
 const ImageCarousel = ({ images, viewComments, setSlideView }) => {
   return (
-    <div className="fixed top-0 left-0 z-50 ">
+    <div className="fixed top-0 left-0 z-40 ">
       <button
-        className="absolute top-3 left-3 z-50 grad_btn_pink"
+        className="absolute top-3 left-3 z-40 grad_btn_pink"
         onClick={() => setSlideView(false)}>
         <BsGrid />
       </button>
@@ -20,29 +20,7 @@ const ImageCarousel = ({ images, viewComments, setSlideView }) => {
               className="object-contain h-screen rounded-md shadow-md"
             />
             {/* max-h-[70vh] */}
-            <div className="absolute top-10 left-1/4 -translate-x-1/2 h-3/4  overflow-y-scroll scrollbar-hide ">
-              {image.comments.map((comment) => (
-                <div className=" ml-5 p-2 m-2 h-fit rounded-md w-fit">
-                  <div className="flex items-center ">
-                    <Image
-                      src={`${comment.split(":>")[0]}`}
-                      alt="profile"
-                      className="rounded-full"
-                      width={45}
-                      height={45}
-                    />
-                    <div className="">
-                      <h1 className="ml-2 blue_gradient font-satoshi font-semibold capitalize text-lg">
-                        {comment.split(":>")[1] + ":"}
-                      </h1>
-                      <p className="ml-5 font-mono break-words text-white text-base w-60">
-                        {comment.split(":>")[2]}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+
             <div className=" bg-slate-500 w-3/6">
               <p className="legend glassmorphism_wp">
                 <h1 className="text-xl font-mono">{image.caption}</h1>
