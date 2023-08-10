@@ -87,12 +87,12 @@ const AlbumIcon = ({
               </h1>
             </div>
           )}
-          <div className="absolute transition-all duration-700  top-full -translate-y-12 group-hover:-translate-y-full bg-gradient-to-t from-gray-500 bg-opacity-25    group-hover:bg-opacity-75 group-hover:bg-gray-700 items-start w-full overflow-hidden p-2">
-            <div className="flex text-3xl text-indigo-100 mb-3 top-5 font-semibold drop-shadow-2xl font-satoshi capitalize justify-center  text-center">
+          <div className="absolute transition-all duration-700  top-full -translate-y-12 group-hover:-translate-y-full bg-gradient-to-t from-gray-500 bg-opacity-25    group-hover:bg-opacity-75 group-hover:bg-gray-700 items-start w-fit overflow-hidden p-2">
+            <div className="flex  text-sm lg:text-3xl text-indigo-100 mb-3 top-5 font-semibold drop-shadow-2xl font-satoshi capitalize justify-center  text-center">
               {data?.albumname}
             </div>
             <div className="transition-all duration-700 justify-center items-center">
-              <p className="text-xl text-center capitalize  texs font-mono break-words w-fit max-w-full">
+              <p className="text-sm lg:text-xl text-center capitalize  texs font-mono break-words w-fit max-w-full">
                 {data?.desc}
               </p>
             </div>
