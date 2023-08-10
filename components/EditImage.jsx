@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
+import { MdOutlineClear } from "react-icons/md";
 import FileBase from "react-file-base64";
 import Image from "next/image";
 
@@ -44,9 +45,17 @@ const EditImage = ({ viewEdit, setViewEdit }) => {
       <form
         onSubmit={(e) => handleSubmit(e)}
         className="glassmorphism fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 shadow-md w-screen-2/5 ">
-        <h1 className="text-2xl font-semibold pink_gradient font-satoshi mb-10">
-          Edit Image
-        </h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-semibold pink_gradient font-satoshi mb-10">
+            Edit Image
+          </h1>
+          <button
+            className="hover:bg-red-400 h-6 w-6 p-1 rounded-full transition-all mb-10"
+            onClick={() => setViewEdit({ view: false, data: "" })}>
+            <MdOutlineClear />
+          </button>
+        </div>
+
         <div className="flex items-center">
           <div className="relative w-40 h-56 border-gray-500 border-2 flex items-center justify-center">
             <div>

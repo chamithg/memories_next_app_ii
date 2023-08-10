@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { MdOutlineClear } from "react-icons/md";
 
 import FileBase from "react-file-base64";
 import { useRouter } from "next/navigation";
@@ -57,9 +58,17 @@ const CreateAlbum = ({ userId, setViewCreate }) => {
       <form
         className="glassmorphism fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 shadow-md w-screen-2/5 "
         onSubmit={(e) => handleSubmit(e)}>
-        <h1 className="text-2xl font-semibold pink_gradient font-satoshi mb-10">
-          Create Album
-        </h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-semibold pink_gradient font-satoshi mb-10">
+            Create Album
+          </h1>
+          <button
+            className="hover:bg-red-400 h-6 w-6 p-1 rounded-full transition-all mb-10"
+            onClick={() => setViewCreate(false)}>
+            <MdOutlineClear />
+          </button>
+        </div>
+
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
             Album Name

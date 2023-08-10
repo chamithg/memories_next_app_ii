@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
+import { MdOutlineClear } from "react-icons/md";
 
 import FileBase from "react-file-base64";
 import Image from "next/image";
@@ -70,9 +71,17 @@ const CreateImage = ({ postID, setUploadView }) => {
             )}
           </div>
           <div className="flex flex-col">
-            <label className="block text-gray-700 ml-3 text-sm font-bold">
-              Caption
-            </label>
+            <div className="flex items-center justify-between">
+              <label className="block text-gray-700 ml-3 text-sm font-bold">
+                Caption
+              </label>
+              <button
+                className="hover:bg-red-400 h-6 w-6 p-1 rounded-full transition-all"
+                onClick={() => setUploadView(false)}>
+                <MdOutlineClear />
+              </button>
+            </div>
+
             {showValidations && !uploadImage.image && (
               <h1 className="ml-2 text-red-600 font-semibold font-satoshi">
                 Please choose an image
